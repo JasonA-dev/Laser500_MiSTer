@@ -563,7 +563,8 @@ wire [7:0]  sdram_dout   ;
 wire [7:0]  sdram_din    ; 
 
 
-
+// AJS TODO -- see downloader.sv -- we need to write
+// the basic address into RAM after we load the PRG file
 
 
 always @(*) begin
