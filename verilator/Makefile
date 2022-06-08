@@ -53,8 +53,21 @@ CC_OPT = -O
 #CC_OPT =   
 
 V_SRC = \
-	sim.v
-
+	sim.v \
+	$(RTL)/laser500.sv \
+	$(RTL)/downloader.sv \
+	$(RTL)/eraser.v \
+	$(RTL)/VTL_chip.v \
+	$(RTL)/rom_charset.v \
+	$(RTL)/sdram.v \
+	$(RTL)/tv80/tv80_alu.v \
+	$(RTL)/tv80/tv80_core.v \
+	$(RTL)/tv80/tv80_mcode.v \
+	$(RTL)/tv80/tv80_reg.v \
+	$(RTL)/tv80/tv80e.v \                                    
+	$(RTL)/rom_charset.v \  
+	$(RTL)/rom_charset_alternate.v \ 
+	$(RTL)/dpram.v 
 
 C_SRC = \
 	sim_main.cpp  \
