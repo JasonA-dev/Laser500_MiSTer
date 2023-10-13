@@ -7,10 +7,15 @@ verilator \
 --top-module top sim.v \
 	../rtl/laser500.sv \
 	../rtl/downloader.sv \
-	../rtl/dpram.v \
+	../rtl/dpram.sv \
+	../rtl/VTL_chip.sv \
 	../rtl/eraser.v \
-	../rtl/rom_charset_alternate_bb.v \
+	../rtl/keyboard.v \
 	../rtl/rom_charset_alternate.v \
 	../rtl/rom_charset.v \
-	../rtl/sdram.v \	
-	../rtl/VTL_chip.v		
+	../rtl/tv80/tv80e.v \
+	../rtl/tv80/tv80_core.v \
+	../rtl/tv80/tv80_alu.v \
+	../rtl/tv80/tv80_reg.v \
+	../rtl/tv80/tv80_mcode.v \
+	../rtl/sdram.v

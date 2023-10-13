@@ -38,3 +38,12 @@ c5_pin_model_dump.txt
 *.cdf
 *.qarlog
 qar_info.json
+verilator/x64/Release/
+verilator/obj_dir/
+verilator/.vs/sim/v17/Browse.VC.db
+verilator/.vs/sim/FileContentIndex/bece51d1-47b4-4ece-9f5a-944764445d1a.vsidx
+verilator/.vs/sim/FileContentIndex/64d6efd8-8020-4646-be31-ce519be691e1.vsidx
+verilator/.vs/sim/FileContentIndex/98e0bd03-d289-4147-aae2-ebaa9df9d7fc.vsidx
+verilator/.vs/sim/FileContentIndex/0178de13-5516-45e8-913b-76918633c7e3.vsidx
+verilator/.vs/sim/FileContentIndex/472ec043-cbb3-48fc-a9c1-fdb20b13f9ff.vsidx
+verilator/.vs/sim/v17/ipch/AutoPCH/6cb4a01b6c9dec7/VERILATED.ipch

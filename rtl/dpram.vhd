@@ -6,23 +6,23 @@ USE altera_mf.altera_mf_components.all;
 
 entity dpram is
 	generic (
-		 addr_width_g : integer := 8;
-		 data_width_g : integer := 8
+		address_width : integer := 8;
+		 data_width : integer := 8
 	); 
 	PORT
 	(
-		address_a	: IN STD_LOGIC_VECTOR (addr_width_g-1 DOWNTO 0);
-		address_b	: IN STD_LOGIC_VECTOR (addr_width_g-1 DOWNTO 0);
+		address_a	: IN STD_LOGIC_VECTOR (address_width-1 DOWNTO 0);
+		address_b	: IN STD_LOGIC_VECTOR (address_width-1 DOWNTO 0);
 		clock_a		: IN STD_LOGIC  := '1';
 		clock_b		: IN STD_LOGIC ;
-		data_a		: IN STD_LOGIC_VECTOR (data_width_g-1 DOWNTO 0);
-		data_b		: IN STD_LOGIC_VECTOR (data_width_g-1 DOWNTO 0) := (others => '0');
+		data_a		: IN STD_LOGIC_VECTOR (data_width-1 DOWNTO 0);
+		data_b		: IN STD_LOGIC_VECTOR (data_width-1 DOWNTO 0) := (others => '0');
 		enable_a		: IN STD_LOGIC  := '1';
 		enable_b		: IN STD_LOGIC  := '1';
 		wren_a		: IN STD_LOGIC  := '0';
 		wren_b		: IN STD_LOGIC  := '0';
-		q_a			: OUT STD_LOGIC_VECTOR (data_width_g-1 DOWNTO 0);
-		q_b			: OUT STD_LOGIC_VECTOR (data_width_g-1 DOWNTO 0)
+		q_a			: OUT STD_LOGIC_VECTOR (data_width-1 DOWNTO 0);
+		q_b			: OUT STD_LOGIC_VECTOR (data_width-1 DOWNTO 0)
 	);
 END dpram;
 
@@ -39,8 +39,8 @@ BEGIN
 		indata_reg_b => "CLOCK1",
 		intended_device_family => "Cyclone V",
 		lpm_type => "altsyncram",
-		numwords_a => 2**addr_width_g,
-		numwords_b => 2**addr_width_g,
+		numwords_a => 2**address_width,
+		numwords_b => 2**address_width,
 		operation_mode => "BIDIR_DUAL_PORT",
 		outdata_aclr_a => "NONE",
 		outdata_aclr_b => "NONE",
@@ -49,10 +49,10 @@ BEGIN
 		power_up_uninitialized => "FALSE",
 		read_during_write_mode_port_a => "NEW_DATA_NO_NBE_READ",
 		read_during_write_mode_port_b => "NEW_DATA_NO_NBE_READ",
-		widthad_a => addr_width_g,
-		widthad_b => addr_width_g,
-		width_a => data_width_g,
-		width_b => data_width_g,
+		widthad_a => address_width,
+		widthad_b => address_width,
+		width_a => data_width,
+		width_b => data_width,
 		width_byteena_a => 1,
 		width_byteena_b => 1,
 		wrcontrol_wraddress_reg_b => "CLOCK1"

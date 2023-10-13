@@ -30,7 +30,7 @@ using namespace std;
 // Simulation control
 // ------------------
 int initialReset = 48;
-bool run_enable = 1;
+bool run_enable = 0;
 int batchSize = 150000;
 bool single_step = 0;
 bool multi_step = 0;
@@ -38,7 +38,7 @@ int multi_step_amount = 1024;
 
 // Debug GUI 
 // ---------
-const char* windowTitle = "Verilator Sim: Arcade-Centipede";
+const char* windowTitle = "Verilator Sim: Laser500";
 const char* windowTitle_Control = "Simulation control";
 const char* windowTitle_DebugLog = "Debug log";
 const char* windowTitle_Video = "VGA output";
@@ -252,7 +252,7 @@ int main(int argc, char** argv, char** env) {
 	// Setup video output
 	if (video.Initialise(windowTitle) == 1) { return 1; }
 
-	bus.QueueDownload("./test.bin", 0, true);
+	bus.QueueDownload("./boot.rom", 0, true);
 
 
 #ifdef WIN32
@@ -312,9 +312,45 @@ int main(int argc, char** argv, char** env) {
 		ImGui::SetWindowPos(windowTitle_DebugLog, ImVec2(0, 160), ImGuiCond_Once);
 
 		// Memory debug
-		//ImGui::Begin("PGROM Editor");
-		//mem_edit.DrawContents(top->top__DOT__uut__DOT__rom__DOT__mem, 32768, 0);
-		//ImGui::End();
+		ImGui::Begin("RAM 64K");
+		mem_edit.DrawContents(&top->top__DOT__laser500__DOT__dpram__DOT__mem, 65535, 0);
+		ImGui::End();
+
+		// Debug Z80 CPU
+		ImGui::Begin("Z80 CPU");
+		ImGui::Text("reset_n:  0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__reset_n);	
+		ImGui::Spacing();
+		ImGui::Text("int_n:    0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__int_n);	
+		ImGui::Text("m1_n:     0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__m1_n);	
+		ImGui::Text("mreq_n:   0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__mreq_n);	
+		ImGui::Text("iorq_n:   0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__iorq_n);	
+		ImGui::Text("rd_n:     0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__rd_n);	
+		ImGui::Text("wr_n:     0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__wr_n);	
+		ImGui::Spacing();	
+		ImGui::Text("A:        0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__A);	
+		ImGui::Text("di:       0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__di);			
+		ImGui::Text("dout:     0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__dout);											
+		ImGui::Spacing();	
+		ImGui::Text("SP:       0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SP);				
+		ImGui::Text("PC:       0x%04X", top->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__PC);		
+		ImGui::Spacing();		
+		ImGui::End();
+
+		// Debug VTL_chip
+		ImGui::Begin("VTL_chip");
+		ImGui::Text("RESET:  0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__RESET);	
+		ImGui::Spacing();
+		ImGui::Text("A:    0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__A);	
+		ImGui::Text("DI:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DI);	
+		ImGui::Text("DO:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DO);
+		ImGui::Spacing();	
+		ImGui::Text("sdram_addr:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_addr);	
+		ImGui::Text("sdram_dout:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_dout);	
+		ImGui::Text("sdram_din:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din);
+		ImGui::Text("sdram_wr:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_wr);	
+		ImGui::Text("sdram_rd:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_rd);
+		ImGui::Spacing();		
+		ImGui::End();
 
 		// Trace/VCD window
 		ImGui::Begin(windowTitle_Trace);

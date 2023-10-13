@@ -48,7 +48,7 @@ wire        cpu_iorq_n;
 
 tv80e cpu
 (
-	.reset_n ( ~CPU_RESET    ),  
+	.reset_n ( ~CPU_RESET   ),  
 	
 	.clk     ( clk          ),   
 	.cen     ( CPUENA        ),   // CPU enable (positive edge)
@@ -62,8 +62,8 @@ tv80e cpu
 	
 	.iorq_n  ( cpu_iorq_n    ),   // IO REQUEST 0=read from I/O
 	.mreq_n  ( cpu_mreq_n    ),   // MEMORY REQUEST, idicates the bus has a valid memory address
-	.m1_n    ( 1'b1          ),   // connected to expansion port on the Laser 500
-	.rfsh_n  ( 1'b1          ),   // connected to expansion port on the Laser 500
+	.m1_n    (         ),   // 1'b1 connected to expansion port on the Laser 500
+	.rfsh_n  (         ),   // 1'b1 connected to expansion port on the Laser 500
 
 	.busrq_n ( 1'b1          ),   // connected to VCC on the Laser 500
 	.int_n   ( video_vs      ),   // VSYNC interrupt
@@ -84,12 +84,12 @@ tv80e cpu
 //
 // VTL CHIP GA1
 //
-wire        sdram_clkref ;
-wire [24:0] sdram_addr   ;
-wire        sdram_wr     ;
-wire        sdram_rd     ;
-wire [7:0]  sdram_dout   ; 
-wire [7:0]  sdram_din    ; 
+reg        sdram_clkref ;
+reg [24:0] sdram_addr   ;
+reg        sdram_wr     ;
+reg        sdram_rd     ;
+reg [7:0]  sdram_dout   ; 
+reg [7:0]  sdram_din    ; 
 
 wire [24:0] vdc_sdram_addr; 
 wire        vdc_sdram_wr;
@@ -100,7 +100,7 @@ wire  [7:0] vdc_sdram_din;
 VTL_chip VTL_chip 
 (	
 	.F14M   ( clk         ),
-	.RESET  ( ~pll_locked ),
+	.RESET  ( reset ),
 	.BLANK  ( BLANK       ),		
 	
 	// cpu
@@ -115,13 +115,14 @@ VTL_chip VTL_chip
 	.DO       ( cpu_dout      ),
 		
 	// video
-	.hsync  ( video_hs    ),
-	.vsync  ( video_vs    ),
-	.r      ( video_r     ),
-	.g      ( video_g     ),
-	.b      ( video_b     ),
-	.display_enable(display_enable),
+	.hsync  ( hsync    ),
+	.vsync  ( vsync    ),
+	.r      ( r     ),
+	.g      ( g     ),
+	.b      ( b     ),
 	
+	.non_visible_area(display_enable),
+
 	//	SDRAM interface
 	.sdram_addr   ( vdc_sdram_addr   ), 
 	.sdram_din    ( vdc_sdram_din    ),
@@ -200,11 +201,11 @@ end
 
 always @(*) begin
 	if(ioctl_download && ioctl_wr && ioctl_index==0) begin
-		sdram_din    = ioctl_data;
-		sdram_addr   = ioctl_addr;
-		sdram_wr     = ioctl_wr;
-		sdram_rd     = 1'b1;
-		sdram_clkref = clk;
+		sdram_din    <= ioctl_data;
+		sdram_addr   <= ioctl_addr;
+		sdram_wr     <= ioctl_wr;
+		sdram_rd     <= 1'b1;
+		sdram_clkref <= clk;
 	end	
 	else if(ioctl_download && ioctl_wr && ioctl_index==1) begin
 		sdram_din    = ioctl_data;
@@ -213,7 +214,7 @@ always @(*) begin
 		sdram_rd     = 1'b1;
 		sdram_clkref = clk;
 	end	
-	else if(eraser_busy) begin		
+	else if(eraser_busy) begin	
 		sdram_din    = eraser_data;
 		sdram_addr   = eraser_addr;
 		sdram_wr     = eraser_wr;
@@ -229,7 +230,7 @@ always @(*) begin
 	end	
 end
 
-dpram #(.addr_width_g(18),.data_width_g(8)) dpram
+dpram #(.address_width(18),.data_width(8)) dpram
 (
 	.address_a(sdram_addr[17:0]),
 	.clock_a(clk),

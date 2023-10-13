@@ -39,8 +39,9 @@ module VTL_chip
 	output [5:0] r,
 	output [5:0] g,
 	output [5:0] b,
-	output display_enable,
 	
+	output wire non_visible_area,
+
 	output reg BUZZER,
 	output reg CASOUT,   // mapped I/O bit 2  		
 	
@@ -127,17 +128,35 @@ wire[7:0] charsetQ_std;
 
 assign charsetQ = (!alt_font) ? charsetQ_std : charsetQ_alt;
 
-rom_charset rom_charset (
-	.address(charsetAddress),
-	.clock(F14M),
-	.q(charsetQ_std)
-);							  						
+//******************************************************************************************************************************
+// CHARSET ROM
+//******************************************************************************************************************************
 
-rom_charset_alternate rom_charset_alternate (
-	.address(charsetAddress),
-	.clock(F14M),
-	.q(charsetQ_alt)
-);							  						
+dpram #(13, 8,"../hex/charset8k.hex") rom_charset
+(
+	.clock_a(F14M),
+	.address_a(charsetAddress),
+	.enable_a(1'b1),
+	.wren_a(1'b0),
+	.data_a(),
+	.q_a(charsetQ_std)
+);
+
+//******************************************************************************************************************************
+// CHARSET 64 ROM
+//******************************************************************************************************************************
+
+dpram #(13, 8,"../hex/charset64.hex") rom_charset_alternate
+(
+	.clock_a(F14M),
+	.address_a(charsetAddress),
+	.enable_a(1'b1),
+	.wren_a(1'b0),
+	.data_a(),
+	.q_a(charsetQ_alt)
+);
+
+//******************************************************************************************************************************
 
 wire [3:0] fg;
 wire [3:0] bg;
@@ -146,9 +165,8 @@ wire [3:0] bg;
 assign hsync = (hcnt < hsw) ? 0 : 1;
 assign vsync = (vcnt <   2) ? 0 : 1;
 
-assign display_enable = ~non_visible_area;
 //wire non_visible_area = hcnt < hsw+hbp || vcnt < 64 || vcnt > 250 || hcnt >= hsw+hbp+H;                        
-wire non_visible_area = hcnt < hsw+hbp || vcnt < 4 || vcnt > (312-2) || hcnt >= hsw+hbp+H;
+assign non_visible_area = hcnt < hsw+hbp || vcnt < 4 || vcnt > (312-2) || hcnt >= hsw+hbp+H;
 						  
 // calculate foreground and background colors						  
 assign fg = (vdc_graphic_mode_enabled && (vdc_graphic_mode_number == 5 || vdc_graphic_mode_number == 2)) || (!vdc_graphic_mode_enabled && vdc_text80_enabled) ? vdc_text80_foreground : fgbg[7:4];
@@ -415,8 +433,8 @@ always@(posedge F14M) begin
 					else if(vdc_graphic_mode_number == 3 || vdc_graphic_mode_number == 0) begin
 						// GR 3 160x192x16, GR 0 160x96
 						if(xcnt[1:0] == 0) begin
-							pixel = char[3:0];
-							char = char >> 4;
+							pixel <= char[3:0];
+							char <= char >> 4;
 						end               
 					end 
 					else if(vdc_graphic_mode_number == 2) begin
@@ -651,5 +669,4 @@ assign b =
 	wire [24:0] cpuReadAddress = { 7'd0, bank, base_addr };		
 		
 endmodule
-
 

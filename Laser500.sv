@@ -206,6 +206,7 @@ localparam CONF_STR = {
 	"O[122:121],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
 	"O2,Custom charset ROM,Off,On;",
 	"F1,PRG,Load Program;",
+	"F2,BIN,Load Bin;",	
 	"-;",
 	"R0,Reset;",
 	"V,v",`BUILD_DATE 
