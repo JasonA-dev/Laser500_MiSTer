@@ -70,9 +70,9 @@ const int input_pause = 11;
 
 // Video
 // -----
-#define VGA_WIDTH 320
-#define VGA_HEIGHT 240
-#define VGA_ROTATE -1  // 90 degrees anti-clockwise
+#define VGA_WIDTH 240
+#define VGA_HEIGHT 320
+#define VGA_ROTATE 0  // 90 degrees anti-clockwise
 #define VGA_SCALE_X vga_scale
 #define VGA_SCALE_Y vga_scale
 SimVideo video(VGA_WIDTH, VGA_HEIGHT, VGA_ROTATE);
@@ -218,6 +218,8 @@ int main(int argc, char** argv, char** env) {
 	bus.ioctl_dout = &top->ioctl_dout;
 	bus.ioctl_din = &top->ioctl_din;
 
+	input.ps2_key = &top->ps2_key;
+
 #ifndef DISABLE_AUDIO
 	audio.Initialise();
 #endif
@@ -315,6 +317,12 @@ int main(int argc, char** argv, char** env) {
 		ImGui::Begin("RAM 64K");
 		mem_edit.DrawContents(&top->top__DOT__laser500__DOT__dpram__DOT__mem, 65535, 0);
 		ImGui::End();
+		ImGui::Begin("ROM CHARSET");
+		mem_edit.DrawContents(&top->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem, 65535, 0);
+		ImGui::End();
+		ImGui::Begin("ROM CHARSET 64");
+		mem_edit.DrawContents(&top->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem, 65535, 0);
+		ImGui::End();
 
 		// Debug Z80 CPU
 		ImGui::Begin("Z80 CPU");
@@ -349,7 +357,12 @@ int main(int argc, char** argv, char** env) {
 		ImGui::Text("sdram_din:    0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din);
 		ImGui::Text("sdram_wr:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_wr);	
 		ImGui::Text("sdram_rd:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_rd);
-		ImGui::Spacing();		
+		ImGui::Spacing();	
+		ImGui::Text("vdc_graphic_mode_number:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_number);
+		ImGui::Text("vdc_text80_enabled:        0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_text80_enabled);
+		ImGui::Text("vdc_page_7:                0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_page_7);
+		ImGui::Text("vdc_graphic_mode_enabled:  0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_enabled);
+		ImGui::Spacing();	
 		ImGui::End();
 
 		// Trace/VCD window

@@ -13,7 +13,7 @@ verilator \
 	../rtl/keyboard.v \
 	../rtl/rom_charset_alternate.v \
 	../rtl/rom_charset.v \
-	../rtl/tv80/tv80e.v \
+	../rtl/tv80/tv80s.v \
 	../rtl/tv80/tv80_core.v \
 	../rtl/tv80/tv80_alu.v \
 	../rtl/tv80/tv80_reg.v \

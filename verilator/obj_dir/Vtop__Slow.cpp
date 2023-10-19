@@ -78,9 +78,9 @@ const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__colc(0xf45U);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__cold(0xf9fU);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__cole(0xcf0U);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__colf(0xfffU);
-const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_width(0xdU);
+const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_width(0xeU);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__data_width(8U);
-const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__ramLength(0x2000U);
+const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__ramLength(0x4000U);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__address_width(0xdU);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__data_width(8U);
 const IData Vtop::var_top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__ramLength(0x2000U);
@@ -116,7 +116,7 @@ Vtop::~Vtop() {
 
 // Savable
 void Vtop::__Vserialize(VerilatedSerialize& os) {
-    vluint64_t __Vcheckval = 0x62cb0d269a178bfULL;
+    vluint64_t __Vcheckval = 0x42b2f9e585dd02b6ULL;
     os << __Vcheckval;
     os << __VlSymsp->_vm_contextp__;
     os<<clk_48;
@@ -132,6 +132,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<VGA_VB;
     os<<AUDIO_L;
     os<<AUDIO_R;
+    os<<ps2_key;
     os<<ioctl_download;
     os<<ioctl_upload;
     os<<ioctl_wr;
@@ -153,6 +154,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__VGA_VB;
     os<<top__DOT__AUDIO_L;
     os<<top__DOT__AUDIO_R;
+    os<<top__DOT__ps2_key;
     os<<top__DOT__ioctl_download;
     os<<top__DOT__ioctl_upload;
     os<<top__DOT__ioctl_wr;
@@ -188,6 +190,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__display_enable;
     os<<top__DOT__laser500__DOT__joystick_0;
     os<<top__DOT__laser500__DOT__joystick_1;
+    os<<top__DOT__laser500__DOT__KD;
     os<<top__DOT__laser500__DOT__ioctl_download;
     os<<top__DOT__laser500__DOT__ioctl_wr;
     os<<top__DOT__laser500__DOT__ioctl_addr;
@@ -223,7 +226,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__BLANK;
     os<<top__DOT__laser500__DOT__data_out_one;
     os<<top__DOT__laser500__DOT__video_vs;
-    os<<top__DOT__laser500__DOT__KD;
+    os<<top__DOT__laser500__DOT__rfsh_n;
     os<<top__DOT__laser500__DOT__BUZZER;
     os<<top__DOT__laser500__DOT__CASOUT;
     os<<top__DOT__laser500__DOT__CASIN;
@@ -233,7 +236,6 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__img_size;
     os<<top__DOT__laser500__DOT__cpu__DOT__reset_n;
     os<<top__DOT__laser500__DOT__cpu__DOT__clk;
-    os<<top__DOT__laser500__DOT__cpu__DOT__cen;
     os<<top__DOT__laser500__DOT__cpu__DOT__wait_n;
     os<<top__DOT__laser500__DOT__cpu__DOT__int_n;
     os<<top__DOT__laser500__DOT__cpu__DOT__nmi_n;
@@ -249,6 +251,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__cpu__DOT__A;
     os<<top__DOT__laser500__DOT__cpu__DOT__di;
     os<<top__DOT__laser500__DOT__cpu__DOT__dout;
+    os<<top__DOT__laser500__DOT__cpu__DOT__cen;
     os<<top__DOT__laser500__DOT__cpu__DOT__intcycle_n;
     os<<top__DOT__laser500__DOT__cpu__DOT__no_read;
     os<<top__DOT__laser500__DOT__cpu__DOT__write;
@@ -279,8 +282,8 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__intcycle_n;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__stop;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ir_changed;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__flag_z;
+    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__dir;
+    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__dirset;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ACC;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Ap;
@@ -491,6 +494,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__CEN;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__WEH;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__WEL;
+    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__DIRSET;
     for (int __Vi0=0; __Vi0<8; ++__Vi0) {
         os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH[__Vi0];
     }
@@ -498,17 +502,11 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
         os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL[__Vi0];
     }
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__B;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__BP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__C;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__CP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__D;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__DP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__E;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__EP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__H;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__HP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__L;
-    os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__LP;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__IX;
     os<<top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__IY;
     os<<top__DOT__laser500__DOT__VTL_chip__DOT__F14M;
@@ -606,7 +604,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_b;
     os<<top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__data_b;
     os<<top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__q_b;
-    for (int __Vi0=0; __Vi0<8192; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<16384; ++__Vi0) {
         os<<top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem[__Vi0];
     }
     os<<top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_a;
@@ -749,40 +747,16 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__B;
     os<<__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__Sub;
     os<<__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__Carry_In;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hcnt;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vcnt;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v0;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_enabled;
     os<<__Vdly__top__DOT__laser500__DOT__cpu_din;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v1;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v2;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v3;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v4;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_text80_enabled;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_border_color;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_number;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hsw;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hbp;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__char;
-    os<<__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__ramDataD;
     os<<__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os<<__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os<<__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BTR_r;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__PC;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__XY_State;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__TmpAddr;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ACC;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SP;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Auto_Wait_t1;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE_FF2;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt_FF;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__tstate;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle;
-    os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__NMICycle;
     os<<__Vdlyvdim0__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
     os<<__Vdlyvval__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
     os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
@@ -805,7 +779,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     __VlSymsp->__Vserialize(os);
 }
 void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
-    vluint64_t __Vcheckval = 0x62cb0d269a178bfULL;
+    vluint64_t __Vcheckval = 0x42b2f9e585dd02b6ULL;
     os.readAssert(__Vcheckval);
     os >> __VlSymsp->_vm_contextp__;
     os>>clk_48;
@@ -821,6 +795,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>VGA_VB;
     os>>AUDIO_L;
     os>>AUDIO_R;
+    os>>ps2_key;
     os>>ioctl_download;
     os>>ioctl_upload;
     os>>ioctl_wr;
@@ -842,6 +817,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__VGA_VB;
     os>>top__DOT__AUDIO_L;
     os>>top__DOT__AUDIO_R;
+    os>>top__DOT__ps2_key;
     os>>top__DOT__ioctl_download;
     os>>top__DOT__ioctl_upload;
     os>>top__DOT__ioctl_wr;
@@ -877,6 +853,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__display_enable;
     os>>top__DOT__laser500__DOT__joystick_0;
     os>>top__DOT__laser500__DOT__joystick_1;
+    os>>top__DOT__laser500__DOT__KD;
     os>>top__DOT__laser500__DOT__ioctl_download;
     os>>top__DOT__laser500__DOT__ioctl_wr;
     os>>top__DOT__laser500__DOT__ioctl_addr;
@@ -912,7 +889,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__BLANK;
     os>>top__DOT__laser500__DOT__data_out_one;
     os>>top__DOT__laser500__DOT__video_vs;
-    os>>top__DOT__laser500__DOT__KD;
+    os>>top__DOT__laser500__DOT__rfsh_n;
     os>>top__DOT__laser500__DOT__BUZZER;
     os>>top__DOT__laser500__DOT__CASOUT;
     os>>top__DOT__laser500__DOT__CASIN;
@@ -922,7 +899,6 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__img_size;
     os>>top__DOT__laser500__DOT__cpu__DOT__reset_n;
     os>>top__DOT__laser500__DOT__cpu__DOT__clk;
-    os>>top__DOT__laser500__DOT__cpu__DOT__cen;
     os>>top__DOT__laser500__DOT__cpu__DOT__wait_n;
     os>>top__DOT__laser500__DOT__cpu__DOT__int_n;
     os>>top__DOT__laser500__DOT__cpu__DOT__nmi_n;
@@ -938,6 +914,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__cpu__DOT__A;
     os>>top__DOT__laser500__DOT__cpu__DOT__di;
     os>>top__DOT__laser500__DOT__cpu__DOT__dout;
+    os>>top__DOT__laser500__DOT__cpu__DOT__cen;
     os>>top__DOT__laser500__DOT__cpu__DOT__intcycle_n;
     os>>top__DOT__laser500__DOT__cpu__DOT__no_read;
     os>>top__DOT__laser500__DOT__cpu__DOT__write;
@@ -968,8 +945,8 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__intcycle_n;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__stop;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ir_changed;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__flag_z;
+    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__dir;
+    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__dirset;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ACC;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Ap;
@@ -1180,6 +1157,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__CEN;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__WEH;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__WEL;
+    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__DIRSET;
     for (int __Vi0=0; __Vi0<8; ++__Vi0) {
         os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH[__Vi0];
     }
@@ -1187,17 +1165,11 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
         os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL[__Vi0];
     }
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__B;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__BP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__C;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__CP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__D;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__DP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__E;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__EP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__H;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__HP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__L;
-    os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__LP;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__IX;
     os>>top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__IY;
     os>>top__DOT__laser500__DOT__VTL_chip__DOT__F14M;
@@ -1295,7 +1267,7 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_b;
     os>>top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__data_b;
     os>>top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__q_b;
-    for (int __Vi0=0; __Vi0<8192; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<16384; ++__Vi0) {
         os>>top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem[__Vi0];
     }
     os>>top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_a;
@@ -1438,40 +1410,16 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__B;
     os>>__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__Sub;
     os>>__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub1__31__Carry_In;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hcnt;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vcnt;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v0;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_enabled;
     os>>__Vdly__top__DOT__laser500__DOT__cpu_din;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v1;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v2;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v3;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__banks__v4;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_text80_enabled;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_border_color;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_number;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hsw;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__hbp;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__char;
-    os>>__Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__ramDataD;
     os>>__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os>>__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os>>__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BTR_r;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__PC;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__XY_State;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__TmpAddr;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ACC;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SP;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Auto_Wait_t1;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE_FF2;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt_FF;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__tstate;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle;
-    os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__NMICycle;
     os>>__Vdlyvdim0__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
     os>>__Vdlyvval__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
     os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
@@ -1498,7 +1446,7 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_initial__TOP__1\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
-    VlWide<5>/*159:0*/ __Vtemp1;
+    VlWide<6>/*191:0*/ __Vtemp1;
     VlWide<5>/*159:0*/ __Vtemp2;
     // Body
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__enable_a = 1U;
@@ -1507,15 +1455,17 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__wren_a = 0U;
     vlTOPp->top__DOT__laser500__DOT__eraser__DOT__ena = 1U;
     vlTOPp->ioctl_wait = 0U;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__rfsh_n = 1U;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__nmi_n = 1U;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__busrq_n = 1U;
+    vlTOPp->top__DOT__laser500__DOT__rfsh_n = 1U;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hfp = 0xaU;
     __Vtemp1[0U] = 0x2e686578U;
-    __Vtemp1[1U] = 0x6574386bU;
-    __Vtemp1[2U] = 0x68617273U;
-    __Vtemp1[3U] = 0x65782f63U;
-    __Vtemp1[4U] = 0x2e2e2f68U;
-    VL_READMEM_N(true, 8, 8192, 0, VL_CVT_PACK_STR_NW(5, __Vtemp1)
+    __Vtemp1[1U] = 0x6b6e6577U;
+    __Vtemp1[2U] = 0x73657438U;
+    __Vtemp1[3U] = 0x63686172U;
+    __Vtemp1[4U] = 0x6865782fU;
+    __Vtemp1[5U] = 0x2e2e2fU;
+    VL_READMEM_N(true, 8, 16384, 0, VL_CVT_PACK_STR_NW(6, __Vtemp1)
                  ,  &(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem)
                  , 0, ~0ULL);
     __Vtemp2[0U] = 0x2e686578U;
@@ -1526,19 +1476,21 @@ void Vtop::_initial__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     VL_READMEM_N(true, 8, 8192, 0, VL_CVT_PACK_STR_NW(5, __Vtemp2)
                  ,  &(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem)
                  , 0, ~0ULL);
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hfp = 0xaU;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hbp = 0x46U;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hsw = 0x42U;
     vlTOPp->top__DOT__laser500__DOT__WAIT = 0U;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__cen = 1U;
     vlTOPp->top__DOT__ioctl_wait = vlTOPp->ioctl_wait;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__rfsh_n 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__rfsh_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__nmi_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__nmi_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__busrq_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__busrq_n;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__rfsh_n 
+        = vlTOPp->top__DOT__laser500__DOT__rfsh_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__wait_n 
         = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__WAIT)));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__cen 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__cen;
 }
 
 void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
@@ -1547,8 +1499,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
     // Body
     vlTOPp->top__DOT__VGA_HB = vlTOPp->VGA_HB;
     vlTOPp->top__DOT__VGA_VB = vlTOPp->VGA_VB;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__KD 
-        = vlTOPp->top__DOT__laser500__DOT__KD;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CASIN 
         = vlTOPp->top__DOT__laser500__DOT__CASIN;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__joystick_0 
@@ -1569,6 +1519,7 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                    << 8U) | (IData)(vlTOPp->top__DOT__audio)));
     vlTOPp->top__DOT__clk_12 = vlTOPp->clk_12;
     vlTOPp->top__DOT__inputs = vlTOPp->inputs;
+    vlTOPp->top__DOT__ps2_key = vlTOPp->ps2_key;
     vlTOPp->top__DOT__ioctl_upload = vlTOPp->ioctl_upload;
     vlTOPp->top__DOT__ioctl_din = vlTOPp->ioctl_din;
     vlTOPp->top__DOT__laser500__DOT__sdram_clkref = vlTOPp->clk_48;
@@ -1577,20 +1528,21 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__ioctl_addr = vlTOPp->ioctl_addr;
     vlTOPp->top__DOT__ioctl_dout = vlTOPp->ioctl_dout;
     vlTOPp->top__DOT__ioctl_index = vlTOPp->ioctl_index;
+    vlTOPp->top__DOT__laser500__DOT__KD = (0x7fU & 
+                                           ((IData)(vlTOPp->ps2_key) 
+                                            >> 0U));
     vlTOPp->top__DOT__reset = vlTOPp->reset;
     vlTOPp->top__DOT__clk_48 = vlTOPp->clk_48;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__mreq_n 
+        = vlTOPp->top__DOT__laser500__DOT__cpu_mreq_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__iorq_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu_iorq_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__rd_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu_rd_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__wr_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu_wr_n;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__m1_n 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__m1_n;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__di 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__di_reg;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE_FF1;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__Arith16 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Arith16_r;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__AddrC 
@@ -1598,39 +1550,25 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__B 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
         [0U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__BP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
-        [4U];
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__C 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
         [0U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__CP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
-        [4U];
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__D 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
         [1U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__DP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
-        [5U];
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__E 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
         [1U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__EP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
-        [5U];
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__H 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
         [2U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__HP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
-        [6U];
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__L 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
         [2U];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__LP 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
-        [6U];
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CPUENA 
+        = vlTOPp->top__DOT__laser500__DOT__CPUENA;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__MREQ_n 
+        = vlTOPp->top__DOT__laser500__DOT__cpu_mreq_n;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__IORQ_n 
         = vlTOPp->top__DOT__laser500__DOT__cpu_iorq_n;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__RD_n 
@@ -1639,8 +1577,22 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         = vlTOPp->top__DOT__laser500__DOT__cpu_wr_n;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_addr 
         = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_addr;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din 
+        = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_wr 
+        = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_rd 
         = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_rd;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__BUZZER 
+        = vlTOPp->top__DOT__laser500__DOT__BUZZER;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CASOUT 
+        = vlTOPp->top__DOT__laser500__DOT__CASOUT;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__WR 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_wr_n)));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__RD 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_rd_n)));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__IORQ 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_iorq_n)));
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__q_a 
         = vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ_std;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__q_a 
@@ -1661,46 +1613,14 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         = ((vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
             [7U] << 8U) | vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
            [7U]);
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__busak_n 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusAck)));
-    vlTOPp->top__DOT__laser500__DOT__cpu_mreq_n = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__mreq_n;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT____Vcellout__i_reg__DOCH 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
-        [vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RegAddrC];
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT____Vcellout__i_reg__DOCL 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
-        [vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RegAddrC];
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_a 
-        = vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetAddress;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__address_a 
-        = vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetAddress;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__WR 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_wr_n)));
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__RD 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_rd_n)));
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__IORQ 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_iorq_n)));
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ 
-        = ((IData)(vlTOPp->top__DOT__laser500__DOT__st_alt_font)
-            ? (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ_alt)
-            : (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ_std));
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CPUENA 
-        = vlTOPp->top__DOT__laser500__DOT__CPUENA;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din 
-        = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_wr 
-        = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__BUZZER 
-        = vlTOPp->top__DOT__laser500__DOT__BUZZER;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CASOUT 
-        = vlTOPp->top__DOT__laser500__DOT__CASOUT;
-    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__ycnt 
-        = (0x3ffU & ((IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vcnt) 
-                     - (IData)(0x41U)));
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__videoAddress 
         = ((IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_page_7)
             ? (0x1c000U | (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__ramAddress))
             : (0xc000U | (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__ramAddress)));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ 
+        = ((IData)(vlTOPp->top__DOT__laser500__DOT__st_alt_font)
+            ? (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ_alt)
+            : (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetQ_std));
     if ((((IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_enabled) 
           & ((5U == (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_number)) 
              | (2U == (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vdc_graphic_mode_number)))) 
@@ -1717,8 +1637,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__bg 
             = (0xfU & (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__fgbg));
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__cen 
-        = vlTOPp->top__DOT__laser500__DOT__CPUENA;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__VDC_cnt 
         = (7U & (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hcnt));
     vlTOPp->top__DOT__video_vs = ((2U > (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vcnt))
@@ -1880,76 +1798,102 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                                               ? 0U
                                                               : 0x3cU))))))))))))));
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__IR 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__NMICycle 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__NMICycle;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__IntCycle 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT____Vcellout__i_reg__DOCH 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
+        [vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RegAddrC];
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT____Vcellout__i_reg__DOCL 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
+        [vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RegAddrC];
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__ycnt 
+        = (0x3ffU & ((IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__vcnt) 
+                     - (IData)(0x41U)));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__Z16 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Z16_r;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__IR 
-        = (0x3fU & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                    >> 0U));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__A 
+        = vlTOPp->top__DOT__laser500__DOT__cpu_addr;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__DO 
         = vlTOPp->top__DOT__laser500__DOT__cpu_dout;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__DI 
         = vlTOPp->top__DOT__laser500__DOT__cpu_din;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__address_a 
+        = vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetAddress;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__address_a 
+        = vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__charsetAddress;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__A = vlTOPp->top__DOT__laser500__DOT__cpu_addr;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__di = vlTOPp->top__DOT__laser500__DOT__cpu_din;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__dout 
         = vlTOPp->top__DOT__laser500__DOT__cpu_dout;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__halt_n 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt_FF)));
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__intcycle_n 
-        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle)));
-    vlTOPp->top__DOT__laser500__DOT__cpu_addr = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__A;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__BitMask 
-        = ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-            ? ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                ? ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                    ? 0x80U : 0x40U) : ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                                         ? 0x20U : 0x10U))
-            : ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                ? ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                    ? 8U : 4U) : ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
-                                   ? 2U : 1U)));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__base_addr 
+        = (0x3fffU & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_addr));
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__bank_bits 
+        = (3U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu_addr) 
+                 >> 0xeU));
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CPU_cnt 
         = (3U & (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hcnt));
-    vlTOPp->top__DOT__laser500__DOT__BLANK = vlTOPp->ioctl_download;
+    vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__MREQ 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu_mreq_n)));
+    vlTOPp->top__DOT__laser500__DOT__BLANK = ((IData)(vlTOPp->ioctl_download) 
+                                              | (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy));
+    vlTOPp->top__DOT__laser500__DOT__sdram_rd = ((((IData)(vlTOPp->ioctl_download) 
+                                                   & (IData)(vlTOPp->ioctl_wr)) 
+                                                  & (0U 
+                                                     == (IData)(vlTOPp->ioctl_index))) 
+                                                 | ((((IData)(vlTOPp->ioctl_download) 
+                                                      & (IData)(vlTOPp->ioctl_wr)) 
+                                                     & (1U 
+                                                        == (IData)(vlTOPp->ioctl_index))) 
+                                                    | ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy) 
+                                                       | (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_rd))));
     vlTOPp->top__DOT__laser500__DOT__sdram_wr = ((((IData)(vlTOPp->ioctl_download) 
                                                    & (IData)(vlTOPp->ioctl_wr)) 
                                                   & (0U 
                                                      == (IData)(vlTOPp->ioctl_index)))
                                                   ? (IData)(vlTOPp->ioctl_wr)
-                                                  : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr));
-    vlTOPp->top__DOT__laser500__DOT__sdram_rd = ((((IData)(vlTOPp->ioctl_download) 
-                                                   & (IData)(vlTOPp->ioctl_wr)) 
-                                                  & (0U 
-                                                     == (IData)(vlTOPp->ioctl_index))) 
-                                                 | (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_rd));
+                                                  : 
+                                                 ((((IData)(vlTOPp->ioctl_download) 
+                                                    & (IData)(vlTOPp->ioctl_wr)) 
+                                                   & (1U 
+                                                      == (IData)(vlTOPp->ioctl_index)))
+                                                   ? (IData)(vlTOPp->ioctl_wr)
+                                                   : 
+                                                  ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
+                                                    ? (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_wr)
+                                                    : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr))));
+    vlTOPp->top__DOT__laser500__DOT__CPU_RESET = (((IData)(vlTOPp->ioctl_download) 
+                                                   | (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)) 
+                                                  | (IData)(vlTOPp->reset));
     if ((((IData)(vlTOPp->ioctl_download) & (IData)(vlTOPp->ioctl_wr)) 
          & (0U == (IData)(vlTOPp->ioctl_index)))) {
         vlTOPp->top__DOT__laser500__DOT__sdram_din 
             = vlTOPp->ioctl_dout;
         vlTOPp->top__DOT__laser500__DOT__sdram_addr 
-            = vlTOPp->ioctl_addr;
+            = (0x1ffffffU & vlTOPp->ioctl_addr);
     } else {
         vlTOPp->top__DOT__laser500__DOT__sdram_din 
-            = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din;
+            = ((((IData)(vlTOPp->ioctl_download) & (IData)(vlTOPp->ioctl_wr)) 
+                & (1U == (IData)(vlTOPp->ioctl_index)))
+                ? (IData)(vlTOPp->ioctl_dout) : ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
+                                                  ? (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_data)
+                                                  : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din)));
         vlTOPp->top__DOT__laser500__DOT__sdram_addr 
-            = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_addr;
+            = (0x1ffffffU & ((((IData)(vlTOPp->ioctl_download) 
+                               & (IData)(vlTOPp->ioctl_wr)) 
+                              & (1U == (IData)(vlTOPp->ioctl_index)))
+                              ? ((IData)(0x8995U) + vlTOPp->ioctl_addr)
+                              : ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
+                                  ? vlTOPp->top__DOT__laser500__DOT__eraser_addr
+                                  : vlTOPp->top__DOT__laser500__DOT__vdc_sdram_addr)));
     }
-    vlTOPp->top__DOT__laser500__DOT__CPU_RESET = ((IData)(vlTOPp->ioctl_download) 
-                                                  | (IData)(vlTOPp->reset));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__DI_Reg 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__di_reg;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__flag_z 
-        = (1U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F) 
-                 >> 6U));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__m1_n 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__m1_n;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntE_FF1;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__ISet 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__F 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__IntCycle 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__ALU_Op 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op_r;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__ISet 
@@ -1958,13 +1902,28 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusA;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__BusB 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusB;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__F_In 
-        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_dout 
         = vlTOPp->top__DOT__laser500__DOT__sdram_dout;
     vlTOPp->top__DOT__laser500__DOT__dpram__DOT__q_a 
         = vlTOPp->top__DOT__laser500__DOT__sdram_dout;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__LDSPHL = 0U;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__halt_n 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt_FF)));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__busak_n 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusAck)));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__intcycle_n 
+        = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IntCycle)));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__IR 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__F 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__NMICycle 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__NMICycle;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__IR 
+        = (0x3fU & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                    >> 0U));
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__F_In 
+        = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__F;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SetEI = 0U;
     if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
             if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
@@ -1973,12 +1932,152 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                         if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                             if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                           >> 2U)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SetEI = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_SCF = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 7U)))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 6U)))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 3U)))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_SCF = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CCF = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 7U)))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 6U)))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CCF = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CPL = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 7U)))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 6U)))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 4U)))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CPL = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__JumpXY = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 4U)))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 2U)))) {
                                 if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                               >> 1U)))) {
                                     if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__LDSPHL = 1U;
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__JumpXY = 1U;
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 3U;
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 2U;
+                                }
+                            }
+                        }
+                    }
+                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 3U;
+                                }
+                            }
+                        }
+                    }
+                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 2U)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 1U;
                             }
                         }
                     }
@@ -2056,29 +2155,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_SCF = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 7U)))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 6U)))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 3U)))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_SCF = 1U;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ExchangeRS = 0U;
     if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
@@ -2093,78 +2169,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                               >> 1U)))) {
                                     if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                                         vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ExchangeRS = 1U;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 3U;
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 2U;
-                                }
-                            }
-                        }
-                    }
-                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 3U;
-                                }
-                            }
-                        }
-                    }
-                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 2U)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Prefix = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CCF = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 7U)))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 6U)))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CCF = 1U;
                                     }
                                 }
                             }
@@ -2244,20 +2248,19 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__JumpXY = 0U;
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__LDSPHL = 0U;
     if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
             if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                 if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 4U)))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                         if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                             if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                           >> 2U)))) {
                                 if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                               >> 1U)))) {
                                     if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__JumpXY = 1U;
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__LDSPHL = 1U;
                                     }
                                 }
                             }
@@ -2289,27 +2292,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SetEI = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 2U)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__SetEI = 1U;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt = 0U;
     if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
@@ -2317,29 +2299,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                 if ((0x36U == (0x3fU & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
                     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Halt = 1U;
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CPL = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 7U)))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 6U)))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 4U)))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_CPL = 1U;
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -2360,6 +2319,16 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__BitMask 
+        = ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+            ? ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                ? ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                    ? 0x80U : 0x40U) : ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                                         ? 0x20U : 0x10U))
+            : ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                ? ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                    ? 8U : 4U) : ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))
+                                   ? 2U : 1U)));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__UseCarry 
         = (IData)((1U == (5U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op_r))));
     vlTOPp->__Vfunc_top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_alu__DOT__AddSub4__26__Carry_In 
@@ -2509,9 +2478,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ClkEn 
-        = ((IData)(vlTOPp->top__DOT__laser500__DOT__CPUENA) 
-           & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusAck)));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_mcode__DOT__MCycle 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__last_mcycle 
@@ -2554,163 +2520,166 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__tstate 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__tstate;
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                              >> 5U)))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 2U)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((1U & (~ 
-                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                    >> 1U)))) {
-                                            if ((4U 
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 0U;
+    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 7U)))) {
+                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 2U)))) {
+                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                  >> 1U)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                            if ((1U 
+                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                                if (
+                                                    (2U 
+                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                 >> 2U)))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
                                                  & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                             >> 6U)))) {
-            if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 2U)))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 2U)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                                }
-                            }
-                        }
-                    }
-                }
-            } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                              >> 2U)))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } else if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 7U)))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 2U)))) {
                                 if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                               >> 1U)))) {
                                     if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                             >> 2U)))) {
                             if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                           >> 1U)))) {
                                 if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 2U)))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                             >> 2U)))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                        }
+                                    }
                                 }
                             }
                         }
                     } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 2U)))) {
                             if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                           >> 1U)))) {
                                 if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                        }
+                                    }
                                 }
                             }
                         }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                         >> 2U)))) {
                         if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
                                       >> 1U)))) {
                             if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                            }
-                        }
-                    }
-                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
+                                    }
                                 }
                             }
-                        }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 1U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                            }
-                        }
-                    }
-                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 1U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
-                            }
-                        }
-                    }
-                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 1U)))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
                         }
                     }
                 }
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 0U;
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 0U;
+    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 7U)))) {
+                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                  >> 1U)))) {
+                                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                            if ((1U 
+                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                                if (
+                                                    (1U 
+                                                     & (~ 
+                                                        ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                         >> 1U)))) {
+                                                    if (
+                                                        (4U 
+                                                         & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
                                     if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                                         if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
                                             if ((1U 
@@ -2720,7 +2689,27 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                                 if (
                                                     (4U 
                                                      & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((1U 
+                                                 & (~ 
+                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                     >> 1U)))) {
+                                                if (
+                                                    (4U 
+                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
                                                 }
                                             }
                                         }
@@ -2728,7 +2717,8 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                 }
                             }
                         } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
                                 if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                                     if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
                                         if ((1U & (~ 
@@ -2736,7 +2726,45 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                                     >> 1U)))) {
                                             if ((4U 
                                                  & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((1U 
+                                                 & (~ 
+                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                     >> 1U)))) {
+                                                if (
+                                                    (4U 
+                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((1U & (~ 
+                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                    >> 1U)))) {
+                                            if ((4U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
                                             }
                                         }
                                     }
@@ -2745,7 +2773,8 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                         }
                     } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                         if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
                                 if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                                     if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
                                         if ((1U & (~ 
@@ -2753,7 +2782,7 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                                     >> 1U)))) {
                                             if ((4U 
                                                  & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
                                             }
                                         }
                                     }
@@ -2761,74 +2790,15 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                             }
                         }
                     } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 1U)))) {
                             if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                                 if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
                                     if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
                                                   >> 1U)))) {
                                         if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
                                         }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((1U & (~ 
-                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                    >> 1U)))) {
-                                            if ((4U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                  >> 1U)))) {
-                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                  >> 1U)))) {
-                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                              >> 1U)))) {
-                                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
                                     }
                                 }
                             }
@@ -3513,6 +3483,142 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((1U 
+                                                 & (~ 
+                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                     >> 1U)))) {
+                                                if (
+                                                    (4U 
+                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((1U & (~ 
+                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                    >> 1U)))) {
+                                            if ((4U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((1U & (~ 
+                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                    >> 1U)))) {
+                                            if ((4U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                  >> 1U)))) {
+                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((1U & (~ 
+                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                    >> 1U)))) {
+                                            if ((4U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                  >> 1U)))) {
+                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                  >> 1U)))) {
+                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                              >> 1U)))) {
+                                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__RstP = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Inc_WZ = 0U;
     if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
@@ -3715,553 +3821,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                             }
                         }
                     }
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op 
-        = (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                 >> 3U));
-    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 7U)))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 6U)))) {
-                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((6U == 
-                                             (7U & 
-                                              ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                               >> 3U)))) {
-                                            if ((1U 
-                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                                if (
-                                                    (2U 
-                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                                }
-                                            }
-                                        } else {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                        }
-                                    } else if ((6U 
-                                                == 
-                                                (7U 
-                                                 & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                    >> 3U)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                            }
-                                        }
-                                    } else {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                    }
-                                }
-                            } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                 >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                    } else if ((4U 
-                                                & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                                    }
-                                }
-                            }
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((6U == (7U 
-                                                & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                   >> 3U)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                            }
-                                        }
-                                    } else {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                    }
-                                } else if ((6U == (7U 
-                                                   & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                      >> 3U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                        }
-                                    }
-                                } else {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                }
-                            }
-                        }
-                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((6U == (7U 
-                                                & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                   >> 3U)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                            }
-                                        }
-                                    } else {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                    }
-                                } else if ((6U == (7U 
-                                                   & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                      >> 3U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                        }
-                                    }
-                                } else {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                }
-                            }
-                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                             >> 1U)))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                                }
-                            }
-                        }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xcU;
-                            }
-                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 3U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                    }
-                                }
-                            } else {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                 >> 3U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                }
-                            }
-                        } else {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                        }
-                    }
-                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                                }
-                            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                  >> 3U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                        }
-                                    }
-                                } else {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                }
-                            } else if ((6U == (7U & 
-                                               ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                >> 3U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                    }
-                                }
-                            } else {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                            }
-                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                             >> 1U)))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                                }
-                            }
-                        }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                            }
-                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 3U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                    }
-                                }
-                            } else {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                 >> 3U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                }
-                            }
-                        } else {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                        }
-                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                         >> 1U)))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        }
-                    }
-                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                            }
-                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 3U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                    }
-                                }
-                            } else {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                 >> 3U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                                }
-                            }
-                        } else {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                        }
-                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                         >> 1U)))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                            }
-                        }
-                    }
-                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                        }
-                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 3U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                                }
-                            }
-                        } else {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                        }
-                    } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                             >> 3U)))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                            }
-                        }
-                    } else {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                    }
-                }
-            }
-        }
-    } else if ((1U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
-                            }
-                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                             | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                >> 6U))))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
-                            }
-                        }
-                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
-                    }
-                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
-                }
-            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
-                        }
-                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                         | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                            >> 6U))))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
-                        }
-                    }
-                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
-                }
-            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
-            }
-        } else if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
-                        }
-                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                         | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                            >> 6U))))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
-                        }
-                    }
-                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
-                }
-            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
-            }
-        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                    }
-                } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                     | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                        >> 6U))))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-                    }
-                }
-            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-            }
-        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
-        }
-    } else if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                      >> 6U)))) {
-            if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                              >> 2U)))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                        }
-                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 7U;
-                            }
-                        }
-                    } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
-                        }
-                    }
-                }
-            }
-        }
-    } else if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-        if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 1U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                            }
-                        }
-                    } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                            }
-                        }
-                    }
-                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 1U)))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                        }
-                    }
-                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                        }
-                    }
-                }
-            } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                          >> 1U)))) {
-                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xdU;
-                                }
-                            }
-                        }
-                    } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                    }
-                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                        }
-                    }
-                }
-            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                      >> 1U)))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xeU;
-                            }
-                        }
-                    }
-                } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                }
-            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                    }
-                }
-            }
-        } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                  >> 1U)))) {
-                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                        }
-                    }
-                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                        }
-                    }
-                }
-            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                    }
-                }
-            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                    }
-                }
-            }
-        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                    }
-                }
-            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 1U)))) {
-                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
-                }
-            }
-        } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
-                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
                 }
             }
         }
@@ -4532,6 +4091,46 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RRD = 0U;
+    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 7U)))) {
+                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 4U)))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 3U)))) {
+                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                            if ((1U 
+                                                 & (~ 
+                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                     >> 1U)))) {
+                                                if (
+                                                    (1U 
+                                                     & (~ 
+                                                        ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                         >> 2U)))) {
+                                                    if (
+                                                        (8U 
+                                                         & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RRD = 1U;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RLD = 0U;
     if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
@@ -4597,167 +4196,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                                   >> 1U)))) {
                                         if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
                                             vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_BTR = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 0U;
-    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 7U)))) {
-                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                  >> 1U)))) {
-                                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                            if ((1U 
-                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                                if (
-                                                    (1U 
-                                                     & (~ 
-                                                        ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                         >> 1U)))) {
-                                                    if (
-                                                        (4U 
-                                                         & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((1U 
-                                                 & (~ 
-                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                     >> 1U)))) {
-                                                if (
-                                                    (4U 
-                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((1U 
-                                                 & (~ 
-                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                     >> 1U)))) {
-                                                if (
-                                                    (4U 
-                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((1U & (~ 
-                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                    >> 1U)))) {
-                                            if ((4U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((1U 
-                                                 & (~ 
-                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                     >> 1U)))) {
-                                                if (
-                                                    (4U 
-                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((1U & (~ 
-                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                    >> 1U)))) {
-                                            if ((4U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((1U & (~ 
-                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                    >> 1U)))) {
-                                            if ((4U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 1U)))) {
-                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                  >> 1U)))) {
-                                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RETN = 1U;
                                         }
                                     }
                                 }
@@ -5593,6 +5031,553 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op 
+        = (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                 >> 3U));
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 7U)))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 6U)))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((6U == 
+                                             (7U & 
+                                              ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                               >> 3U)))) {
+                                            if ((1U 
+                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                                if (
+                                                    (2U 
+                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                                }
+                                            }
+                                        } else {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                        }
+                                    } else if ((6U 
+                                                == 
+                                                (7U 
+                                                 & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                    >> 3U)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                            }
+                                        }
+                                    } else {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                    }
+                                }
+                            } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                 >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                    } else if ((4U 
+                                                & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                                    }
+                                }
+                            }
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((6U == (7U 
+                                                & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                   >> 3U)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                            }
+                                        }
+                                    } else {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                    }
+                                } else if ((6U == (7U 
+                                                   & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                      >> 3U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                        }
+                                    }
+                                } else {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                }
+                            }
+                        }
+                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((6U == (7U 
+                                                & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                   >> 3U)))) {
+                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                            if ((2U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                            }
+                                        }
+                                    } else {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                    }
+                                } else if ((6U == (7U 
+                                                   & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                      >> 3U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                        }
+                                    }
+                                } else {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                }
+                            }
+                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                             >> 1U)))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xcU;
+                            }
+                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 3U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                    }
+                                }
+                            } else {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                 >> 3U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                }
+                            }
+                        } else {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                        }
+                    }
+                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                                }
+                            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                  >> 3U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                        }
+                                    }
+                                } else {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                }
+                            } else if ((6U == (7U & 
+                                               ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                >> 3U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                    }
+                                }
+                            } else {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                            }
+                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                             >> 1U)))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                            }
+                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 3U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                    }
+                                }
+                            } else {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                 >> 3U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                }
+                            }
+                        } else {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                        }
+                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                         >> 1U)))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        }
+                    }
+                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                            }
+                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 3U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                    }
+                                }
+                            } else {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                                 >> 3U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                                }
+                            }
+                        } else {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                        }
+                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                         >> 1U)))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                            }
+                        }
+                    }
+                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                        }
+                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 3U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                                }
+                            }
+                        } else {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                        }
+                    } else if ((6U == (7U & ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                             >> 3U)))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                            }
+                        }
+                    } else {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                    }
+                }
+            }
+        }
+    } else if ((1U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
+                            }
+                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                             | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                >> 6U))))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
+                            }
+                        }
+                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
+                    }
+                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xaU;
+                }
+            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
+                        }
+                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                         | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                            >> 6U))))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
+                        }
+                    }
+                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
+                }
+            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xbU;
+            }
+        } else if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
+                        }
+                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                         | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                            >> 6U))))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
+                        }
+                    }
+                } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
+                }
+            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 9U;
+            }
+        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                    }
+                } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                     | ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                        >> 6U))))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+                    }
+                }
+            } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+            }
+        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 8U;
+        }
+    } else if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 6U)))) {
+            if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                              >> 2U)))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                        }
+                    } else if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 7U;
+                            }
+                        }
+                    } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0U;
+                        }
+                    }
+                }
+            }
+        }
+    } else if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+        if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 1U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                            }
+                        }
+                    } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                            }
+                        }
+                    }
+                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 1U)))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                        }
+                    }
+                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                        }
+                    }
+                }
+            } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                          >> 1U)))) {
+                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xdU;
+                                }
+                            }
+                        }
+                    } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                    }
+                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                        }
+                    }
+                }
+            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                      >> 1U)))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 0xeU;
+                            }
+                        }
+                    }
+                } else if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                }
+            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                    }
+                }
+            }
+        } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 1U)))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                        }
+                    }
+                } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                        }
+                    }
+                }
+            } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                              >> 1U)))) {
+                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                    }
+                }
+            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                    }
+                }
+            }
+        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                              >> 1U)))) {
+                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                    }
+                }
+            } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 1U;
+                    }
+                }
+            }
+        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                          >> 1U)))) {
+                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 2U;
+                }
+            }
+        } else if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ALU_Op = 3U;
+                }
+            }
+        }
+    }
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_BT = 0U;
     if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
         if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
@@ -5653,40 +5638,148 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
             }
         }
     }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RRD = 0U;
-    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 7U)))) {
-                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 4U)))) {
+    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 0U;
+    if ((0U == (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((0x80U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                              >> 5U)))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
                             if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 3U)))) {
-                                if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                        if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                            if ((1U 
-                                                 & (~ 
-                                                    ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                     >> 1U)))) {
-                                                if (
-                                                    (1U 
-                                                     & (~ 
-                                                        ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
-                                                         >> 2U)))) {
-                                                    if (
-                                                        (8U 
-                                                         & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_RRD = 1U;
-                                                    }
-                                                }
+                                          >> 2U)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                    if ((1U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                        if ((1U & (~ 
+                                                   ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle) 
+                                                    >> 1U)))) {
+                                            if ((4U 
+                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
                                             }
                                         }
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                             >> 6U)))) {
+            if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 2U)))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 2U)))) {
+                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                              >> 2U)))) {
+                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } else if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
+        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                      >> 7U)))) {
+            if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                              >> 1U)))) {
+                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                    }
+                                }
+                            }
+                        } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                }
+                            }
+                        }
+                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 1U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                            }
+                        }
+                    }
+                } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                          >> 1U)))) {
+                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                                }
+                            }
+                        }
+                    } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 1U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                            }
+                        }
+                    }
+                } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                      >> 1U)))) {
+                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
+                            }
+                        }
+                    }
+                } else if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
+                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
+                                  >> 1U)))) {
+                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
+                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__Read_To_Acc = 1U;
                         }
                     }
                 }
@@ -6171,133 +6264,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                           >> 1U)))) {
                                 if ((4U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
                                     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__LDW = 1U;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 0U;
-    if ((0U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-        if ((1U != (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__ISet))) {
-            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                          >> 7U)))) {
-                if ((0x40U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                    if ((0x20U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 2U)))) {
-                                    if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                  >> 1U)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                            if ((1U 
-                                                 & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                                if (
-                                                    (2U 
-                                                     & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                    vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                                 >> 2U)))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 2U)))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                             >> 2U)))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((0x10U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 2U)))) {
-                                if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                              >> 1U)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                        if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                            if ((2U 
-                                                 & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                                vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                             >> 2U)))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((8U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 2U)))) {
-                            if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                          >> 1U)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                    if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                        if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                            vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                         >> 2U)))) {
-                        if ((1U & (~ ((IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR) 
-                                      >> 1U)))) {
-                            if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR)))) {
-                                if ((1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle)))) {
-                                    if ((2U & (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__mcycle))) {
-                                        vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__I_INRC = 1U;
-                                    }
                                 }
                             }
                         }

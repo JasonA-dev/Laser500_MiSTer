@@ -30,9 +30,6 @@ class Vtop__Syms : public VerilatedSyms {
     // SCOPE NAMES
     VerilatedScope __Vscope_TOP;
     VerilatedScope __Vscope_top;
-    VerilatedScope __Vscope_top__laser500__cpu;
-    VerilatedScope __Vscope_top__laser500__cpu__i_tv80_core;
-    VerilatedScope __Vscope_top__laser500__cpu__i_tv80_core__i_reg;
 
     // CREATORS
     Vtop__Syms(VerilatedContext* contextp, Vtop* topp, const char* namep);

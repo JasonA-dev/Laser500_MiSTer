@@ -64,7 +64,7 @@ V_SRC = \
     $(RTL)/tv80/tv80_core.v \
     $(RTL)/tv80/tv80_mcode.v \
     $(RTL)/tv80/tv80_reg.v \
-    $(RTL)/tv80/tv80e.v \                                    
+    $(RTL)/tv80/tv80s.v \                                    
     $(RTL)/rom_charset.v \  
     $(RTL)/rom_charset_alternate.v \ 
     $(RTL)/dpram.sv 

@@ -20,6 +20,8 @@ module top(
    output [15:0] AUDIO_L,
    output [15:0] AUDIO_R,
    
+   input [10:0] ps2_key,
+
    input        ioctl_download,
    input        ioctl_upload,
    input        ioctl_wr,
@@ -77,6 +79,8 @@ laser500 laser500 (
 	.b      ( video_b  ),
 	.display_enable(display_enable),
 	
+   .KD     (ps2_key[6:0]),
+
 	.ioctl_download(ioctl_download),
 	.ioctl_wr(ioctl_wr),
 	.ioctl_addr(ioctl_addr),

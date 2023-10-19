@@ -3,9 +3,9 @@
 
 module VTL_chip 
 (	
-	input    F14M,	           // pixel clock 14.77873   (14688000 in laser500emu)
-	input    RESET,           // initialize at power up
-	input    BLANK,           // blank signal - nothing is done	
+	input    F14M,	              // pixel clock 14.77873   (14688000 in laser500emu)
+	input    RESET,               // initialize at power up
+	input    BLANK,               // blank signal - nothing is done	
 		
 	// cpu interface
     output           CPUCK,       // CPU clock to CPU (F14M / 4) - (not used on the MiST, we use F14M & CPUENA)
@@ -132,7 +132,7 @@ assign charsetQ = (!alt_font) ? charsetQ_std : charsetQ_alt;
 // CHARSET ROM
 //******************************************************************************************************************************
 
-dpram #(13, 8,"../hex/charset8k.hex") rom_charset
+dpram #(14, 8,"../hex/charset8knew.hex") rom_charset
 (
 	.clock_a(F14M),
 	.address_a(charsetAddress),
@@ -165,7 +165,7 @@ wire [3:0] bg;
 assign hsync = (hcnt < hsw) ? 0 : 1;
 assign vsync = (vcnt <   2) ? 0 : 1;
 
-//wire non_visible_area = hcnt < hsw+hbp || vcnt < 64 || vcnt > 250 || hcnt >= hsw+hbp+H;                        
+//assign non_visible_area = hcnt < hsw+hbp || vcnt < 64 || vcnt > 250 || hcnt >= hsw+hbp+H;                        
 assign non_visible_area = hcnt < hsw+hbp || vcnt < 4 || vcnt > (312-2) || hcnt >= hsw+hbp+H;
 						  
 // calculate foreground and background colors						  
@@ -488,7 +488,7 @@ always@(posedge F14M) begin
 					ramAddress[ 4]  = ycnt[6];
 					ramAddress[3:0] = 0;
 					
-						  if(vdc_graphic_mode_number == 5) ramAddress = ramAddress + (xcnt1 >> 3);   
+						 if(vdc_graphic_mode_number == 5) ramAddress = ramAddress + (xcnt1 >> 3);   
 					else if(vdc_graphic_mode_number == 4) ramAddress = ramAddress + (xcnt2 >> 3);   
 					else if(vdc_graphic_mode_number == 3) ramAddress = ramAddress + (xcnt1 >> 3);   
 
@@ -507,7 +507,7 @@ always@(posedge F14M) begin
 					ramAddress[ 3]  = ycnt[6];
 					ramAddress[2:0] = 0;
 					
-						  if(vdc_graphic_mode_number == 2) ramAddress = ramAddress + (xcnt1 >> 4);   
+						 if(vdc_graphic_mode_number == 2) ramAddress = ramAddress + (xcnt1 >> 4);   
 					else if(vdc_graphic_mode_number == 1) ramAddress = ramAddress + (xcnt3 >> 4);   
 
 				end else if(vdc_graphic_mode_number == 0) begin
@@ -541,7 +541,7 @@ always@(posedge F14M) begin
 				ramAddress[ 4]  = ycnt[6];
 				ramAddress[3:0] = 0;
 				
-					  if(vdc_text80_enabled) ramAddress = ramAddress + (xcnt1 >> 3);   
+					 if(vdc_text80_enabled) ramAddress = ramAddress + (xcnt1 >> 3);   
 				else                        ramAddress = ramAddress + (xcnt2 >> 3);
 			end			
 				

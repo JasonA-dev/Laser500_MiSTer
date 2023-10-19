@@ -23,44 +23,42 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module tv80e (/*AUTOARG*/
+module tv80s (/*AUTOARG*/
   // Outputs
-  m1_n, mreq_n, iorq_n, rd_n, wr_n, rfsh_n, halt_n, busak_n, A, dout,
+  m1_n, mreq_n, iorq_n, rd_n, wr_n, rfsh_n, halt_n, busak_n, A, dout, 
   // Inputs
-  reset_n, clk, cen, wait_n, int_n, nmi_n, busrq_n, di, dir, dirset
+  reset_n, clk, wait_n, int_n, nmi_n, busrq_n, di
   );
 
   parameter Mode = 0;    // 0 => Z80, 1 => Fast Z80, 2 => 8080, 3 => GB
   parameter T2Write = 1; // 0 => wr_n active in T3, /=0 => wr_n active in T2
   parameter IOWait  = 1; // 0 => Single cycle I/O, 1 => Std I/O cycle
 
-  input         reset_n;
-  input         clk;
-  input         cen;
-  input         wait_n;
-  input         int_n;
-  input         nmi_n;
-  input         busrq_n;
-  output        m1_n;
-  output        mreq_n;
-  output        iorq_n;
-  output        rd_n;
-  output        wr_n;
-  output        rfsh_n;
-  output        halt_n;
-  output        busak_n;
+
+  input         reset_n; 
+  input         clk; 
+  input         wait_n; 
+  input         int_n; 
+  input         nmi_n; 
+  input         busrq_n; 
+  output        m1_n; 
+  output        mreq_n; 
+  output        iorq_n; 
+  output        rd_n; 
+  output        wr_n; 
+  output        rfsh_n; 
+  output        halt_n; 
+  output        busak_n; 
   output [15:0] A;
   input [7:0]   di;
   output [7:0]  dout;
 
-  input [15:0]  dir;
-  input         dirset;
-
-  reg           mreq_n;
-  reg           iorq_n;
-  reg           rd_n;
-  reg           wr_n;
+  reg           mreq_n; 
+  reg           iorq_n; 
+  reg           rd_n; 
+  reg           wr_n; 
   
+  wire          cen;
   wire          intcycle_n;
   wire          no_read;
   wire          write;
@@ -68,6 +66,8 @@ module tv80e (/*AUTOARG*/
   reg [7:0]     di_reg;
   wire [6:0]    mcycle;
   wire [6:0]    tstate;
+
+  assign    cen = 1;
 
   tv80_core #(Mode, IOWait) i_tv80_core
     (
@@ -93,25 +93,21 @@ module tv80e (/*AUTOARG*/
      .dout (dout),
      .mc (mcycle),
      .ts (tstate),
-     .intcycle_n (intcycle_n),
-     .dir (dir),
-     .dirset (dirset)
+     .intcycle_n (intcycle_n)
      );  
 
   always @(posedge clk or negedge reset_n)
     begin
       if (!reset_n)
         begin
-          //$display("!reset_n");        
           rd_n   <= #1 1'b1;
           wr_n   <= #1 1'b1;
           iorq_n <= #1 1'b1;
           mreq_n <= #1 1'b1;
           di_reg <= #1 0;
         end
-      else if(cen)
+      else
         begin
-          //$display("cen");               
           rd_n <= #1 1'b1;
           wr_n <= #1 1'b1;
           iorq_n <= #1 1'b1;

@@ -15,6 +15,8 @@ module laser500 (
 	input wire [31:0] joystick_0,
 	input wire [31:0] joystick_1,
 
+	input wire [ 6:0] KD, 
+
 	input wire        ioctl_download,
 	input wire        ioctl_wr,
 	input wire [24:0] ioctl_addr,
@@ -46,6 +48,7 @@ wire        cpu_mreq_n;
 wire        cpu_m1_n;
 wire        cpu_iorq_n;
 
+/*
 tv80e cpu
 (
 	.reset_n ( ~CPU_RESET   ),  
@@ -69,10 +72,30 @@ tv80e cpu
 	.int_n   ( video_vs      ),   // VSYNC interrupt
 	.nmi_n   ( 1'b1          ),   // connected to VCC on the Laser 500
 	.wait_n  ( ~WAIT         )    // 
-	/*
-  	.halt_n;
-  	.busak_n;
-  	*/	
+	
+  	//.halt_n;
+  	//.busak_n;
+);
+*/
+
+tv80s cpu 
+(
+	.reset_n(~CPU_RESET ),
+	.clk(clk),
+	//.cen(CPUENA),
+	.wait_n(~WAIT ),
+	.int_n(video_vs),
+	.nmi_n(1'b1),
+	.busrq_n(1'b1),
+	.m1_n(),
+	.rfsh_n(rfsh_n),
+	.mreq_n(cpu_mreq_n),
+	.iorq_n(cpu_iorq_n),
+	.rd_n(cpu_rd_n),
+	.wr_n(cpu_wr_n),
+	.A(cpu_addr),
+	.di(cpu_din),
+	.dout(cpu_dout)
 );
 
 /******************************************************************************************/
@@ -100,7 +123,7 @@ wire  [7:0] vdc_sdram_din;
 VTL_chip VTL_chip 
 (	
 	.F14M   ( clk         ),
-	.RESET  ( CPU_RESET ),
+	.RESET  ( CPU_RESET   ),
 	.BLANK  ( BLANK       ),		
 	
 	// cpu
@@ -175,8 +198,8 @@ eraser
 
 assign WAIT = 0; 
 
-wire CPU_RESET =   ioctl_download | reset; //eraser_busy | reset;
-wire BLANK     =   ioctl_download; // | eraser_busy;
+wire CPU_RESET =   ioctl_download | eraser_busy | reset;
+wire BLANK     =   ioctl_download | eraser_busy;
 
 /******************************************************************************************/
 /******************************************************************************************/
@@ -194,8 +217,6 @@ always @(posedge clk) begin
 	data_out_one <= sdram_dout;
 end
 
-
-
 // AJS TODO -- see downloader.sv -- we need to write
 // the basic address into RAM after we load the PRG file
 
@@ -207,20 +228,20 @@ always @(*) begin
 		sdram_rd     <= 1'b1;
 		sdram_clkref <= clk;
 	end	
-	//else if(ioctl_download && ioctl_wr && ioctl_index==1) begin
-	//	sdram_din    = ioctl_data;
-	//	sdram_addr   = ioctl_addr + 'h8995;
-	//	sdram_wr     = ioctl_wr;
-	//	sdram_rd     = 1'b1;
-	//	sdram_clkref = clk;
-	//end	
-	//else if(eraser_busy) begin	
-	//	sdram_din    = eraser_data;
-	//	sdram_addr   = eraser_addr;
-	//	sdram_wr     = eraser_wr;
-	//	sdram_rd     = 1'b1;		
-	//	sdram_clkref = clk;
-	//end	
+	else if(ioctl_download && ioctl_wr && ioctl_index==1) begin
+		sdram_din    = ioctl_data;
+		sdram_addr   = ioctl_addr + 'h8995;
+		sdram_wr     = ioctl_wr;
+		sdram_rd     = 1'b1;
+		sdram_clkref = clk;
+	end	
+	else if(eraser_busy) begin	
+		sdram_din    = eraser_data;
+		sdram_addr   = eraser_addr;
+		sdram_wr     = eraser_wr;
+		sdram_rd     = 1'b1;		
+		sdram_clkref = clk;
+	end	
 	else begin
 		sdram_din    = vdc_sdram_din;
 		sdram_addr   = vdc_sdram_addr;
