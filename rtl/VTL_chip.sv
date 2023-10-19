@@ -8,7 +8,7 @@ module VTL_chip
 	input    BLANK,           // blank signal - nothing is done	
 		
 	// cpu interface
-   output           CPUCK,       // CPU clock to CPU (F14M / 4) - (not used on the MiST, we use F14M & CPUENA)
+    output           CPUCK,       // CPU clock to CPU (F14M / 4) - (not used on the MiST, we use F14M & CPUENA)
 	output reg       CPUENA,      // CPU enabled signal
 	output           WAIT_n,      // WAIT (TODO handle wait states)
 	input            MREQ_n,      // MEMORY REQUEST (not used--yet) indicates the bus holds a valid memory address
@@ -21,15 +21,15 @@ module VTL_chip
 	
 	// keyboard 	
 	input [ 6:0] KD,  
-   input        CASIN,
+    input        CASIN,
 
-   input [31:0] joystick_0,
+    input [31:0] joystick_0,
 	input [31:0] joystick_1,
 	
 	// sdram interface
 	output reg [24:0] sdram_addr, // sdram address  
 	input       [7:0] sdram_dout, // sdram data ouput
-   output reg  [7:0] sdram_din,  // sdram data input
+    output reg  [7:0] sdram_din,  // sdram data input
 	output reg        sdram_wr,   // sdram write
 	output reg        sdram_rd,   // sdram read	
 	
@@ -49,7 +49,7 @@ module VTL_chip
 	output [2:0] cnt,
 	
 	input          img_mounted, 
-   input   [31:0] img_size    
+    input   [31:0] img_size    
 );
 
 reg [7:0] hfp = 10;         // horizontal front porch, unused time before hsync
@@ -230,7 +230,7 @@ always@(posedge F14M) begin
 			// normal VDC operation
 				
 			// works with 118 MHz sdram clock
-				  if(VDC_cnt == 7) begin sdram_rd <= 1; sdram_addr <= videoAddress;       end 	// VDC ram reading starts; ROM reading ended, data is stored in "char" or "ramDataD"
+				 if(VDC_cnt == 7) begin sdram_rd <= 1; sdram_addr <= videoAddress;       end 	// VDC ram reading starts; ROM reading ended, data is stored in "char" or "ramDataD"
 			else if(VDC_cnt == 0) begin                                                  end 	// VDC ram reading ended; VDC saves data into "ramData"; ROM reading starts
 			else if(VDC_cnt == 1) begin                                                  end 	// 
 			else if(VDC_cnt == 2) begin                                                  end 	// 

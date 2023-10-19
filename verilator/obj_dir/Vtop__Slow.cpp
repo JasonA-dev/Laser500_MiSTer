@@ -116,7 +116,7 @@ Vtop::~Vtop() {
 
 // Savable
 void Vtop::__Vserialize(VerilatedSerialize& os) {
-    vluint64_t __Vcheckval = 0x4b6254d00cc48d88ULL;
+    vluint64_t __Vcheckval = 0x62cb0d269a178bfULL;
     os << __Vcheckval;
     os << __VlSymsp->_vm_contextp__;
     os<<clk_48;
@@ -768,9 +768,6 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os<<__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os<<__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
-    os<<__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
-    os<<__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
-    os<<__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BTR_r;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__PC;
     os<<__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__XY_State;
@@ -792,7 +789,11 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     os<<__Vdlyvdim0__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
     os<<__Vdlyvval__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
     os<<__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
+    os<<__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
+    os<<__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
+    os<<__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     os<<__VinpClk__TOP__top__DOT__laser500__DOT____Vcellinp__cpu__reset_n;
+    os<<__Vclklast__TOP__top__DOT__laser500__DOT__dpram__DOT__clock_b;
     os<<__Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__clock_b;
     os<<__Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_b;
     os<<__Vclklast__TOP__clk_48;
@@ -804,7 +805,7 @@ void Vtop::__Vserialize(VerilatedSerialize& os) {
     __VlSymsp->__Vserialize(os);
 }
 void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
-    vluint64_t __Vcheckval = 0x4b6254d00cc48d88ULL;
+    vluint64_t __Vcheckval = 0x62cb0d269a178bfULL;
     os.readAssert(__Vcheckval);
     os >> __VlSymsp->_vm_contextp__;
     os>>clk_48;
@@ -1456,9 +1457,6 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os>>__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     os>>__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
-    os>>__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
-    os>>__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
-    os>>__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BTR_r;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__PC;
     os>>__Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__XY_State;
@@ -1480,7 +1478,11 @@ void Vtop::__Vdeserialize(VerilatedDeserialize& os) {
     os>>__Vdlyvdim0__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
     os>>__Vdlyvval__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
     os>>__Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
+    os>>__Vdlyvdim0__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
+    os>>__Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
+    os>>__Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     os>>__VinpClk__TOP__top__DOT__laser500__DOT____Vcellinp__cpu__reset_n;
+    os>>__Vclklast__TOP__top__DOT__laser500__DOT__dpram__DOT__clock_b;
     os>>__Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__clock_b;
     os>>__Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_b;
     os>>__Vclklast__TOP__clk_48;
@@ -1659,9 +1661,6 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
         = ((vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
             [7U] << 8U) | vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL
            [7U]);
-    vlTOPp->top__DOT__laser500__DOT__CPU_RESET = (((IData)(vlTOPp->ioctl_download) 
-                                                   | (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)) 
-                                                  | (IData)(vlTOPp->reset));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__busak_n 
         = (1U & (~ (IData)(vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BusAck)));
     vlTOPp->top__DOT__laser500__DOT__cpu_mreq_n = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__mreq_n;
@@ -1916,47 +1915,32 @@ void Vtop::_settle__TOP__2(Vtop__Syms* __restrict vlSymsp) {
                                    ? 2U : 1U)));
     vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__CPU_cnt 
         = (3U & (IData)(vlTOPp->top__DOT__laser500__DOT__VTL_chip__DOT__hcnt));
-    vlTOPp->top__DOT__laser500__DOT__BLANK = ((IData)(vlTOPp->ioctl_download) 
-                                              | (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy));
+    vlTOPp->top__DOT__laser500__DOT__BLANK = vlTOPp->ioctl_download;
+    vlTOPp->top__DOT__laser500__DOT__sdram_wr = ((((IData)(vlTOPp->ioctl_download) 
+                                                   & (IData)(vlTOPp->ioctl_wr)) 
+                                                  & (0U 
+                                                     == (IData)(vlTOPp->ioctl_index)))
+                                                  ? (IData)(vlTOPp->ioctl_wr)
+                                                  : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr));
     vlTOPp->top__DOT__laser500__DOT__sdram_rd = ((((IData)(vlTOPp->ioctl_download) 
                                                    & (IData)(vlTOPp->ioctl_wr)) 
                                                   & (0U 
                                                      == (IData)(vlTOPp->ioctl_index))) 
-                                                 | ((((IData)(vlTOPp->ioctl_download) 
-                                                      & (IData)(vlTOPp->ioctl_wr)) 
-                                                     & (1U 
-                                                        == (IData)(vlTOPp->ioctl_index))) 
-                                                    | ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy) 
-                                                       | (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_rd))));
+                                                 | (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_rd));
     if ((((IData)(vlTOPp->ioctl_download) & (IData)(vlTOPp->ioctl_wr)) 
          & (0U == (IData)(vlTOPp->ioctl_index)))) {
-        vlTOPp->top__DOT__laser500__DOT__sdram_wr = vlTOPp->ioctl_wr;
         vlTOPp->top__DOT__laser500__DOT__sdram_din 
             = vlTOPp->ioctl_dout;
         vlTOPp->top__DOT__laser500__DOT__sdram_addr 
-            = (0x1ffffffU & vlTOPp->ioctl_addr);
+            = vlTOPp->ioctl_addr;
     } else {
-        vlTOPp->top__DOT__laser500__DOT__sdram_wr = 
-            ((((IData)(vlTOPp->ioctl_download) & (IData)(vlTOPp->ioctl_wr)) 
-              & (1U == (IData)(vlTOPp->ioctl_index)))
-              ? (IData)(vlTOPp->ioctl_wr) : ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
-                                              ? (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_wr)
-                                              : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_wr)));
         vlTOPp->top__DOT__laser500__DOT__sdram_din 
-            = ((((IData)(vlTOPp->ioctl_download) & (IData)(vlTOPp->ioctl_wr)) 
-                & (1U == (IData)(vlTOPp->ioctl_index)))
-                ? (IData)(vlTOPp->ioctl_dout) : ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
-                                                  ? (IData)(vlTOPp->top__DOT__laser500__DOT__eraser_data)
-                                                  : (IData)(vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din)));
+            = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_din;
         vlTOPp->top__DOT__laser500__DOT__sdram_addr 
-            = (0x1ffffffU & ((((IData)(vlTOPp->ioctl_download) 
-                               & (IData)(vlTOPp->ioctl_wr)) 
-                              & (1U == (IData)(vlTOPp->ioctl_index)))
-                              ? ((IData)(0x8995U) + vlTOPp->ioctl_addr)
-                              : ((IData)(vlTOPp->top__DOT__laser500__DOT__eraser_busy)
-                                  ? vlTOPp->top__DOT__laser500__DOT__eraser_addr
-                                  : vlTOPp->top__DOT__laser500__DOT__vdc_sdram_addr)));
+            = vlTOPp->top__DOT__laser500__DOT__vdc_sdram_addr;
     }
+    vlTOPp->top__DOT__laser500__DOT__CPU_RESET = ((IData)(vlTOPp->ioctl_download) 
+                                                  | (IData)(vlTOPp->reset));
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__DI_Reg 
         = vlTOPp->top__DOT__laser500__DOT__cpu__DOT__di_reg;
     vlTOPp->top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__flag_z 

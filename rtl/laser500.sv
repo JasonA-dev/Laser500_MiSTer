@@ -100,7 +100,7 @@ wire  [7:0] vdc_sdram_din;
 VTL_chip VTL_chip 
 (	
 	.F14M   ( clk         ),
-	.RESET  ( reset ),
+	.RESET  ( CPU_RESET ),
 	.BLANK  ( BLANK       ),		
 	
 	// cpu
@@ -175,8 +175,8 @@ eraser
 
 assign WAIT = 0; 
 
-wire CPU_RESET =   ioctl_download | eraser_busy | reset;
-wire BLANK     =   ioctl_download | eraser_busy;
+wire CPU_RESET =   ioctl_download | reset; //eraser_busy | reset;
+wire BLANK     =   ioctl_download; // | eraser_busy;
 
 /******************************************************************************************/
 /******************************************************************************************/
@@ -207,20 +207,20 @@ always @(*) begin
 		sdram_rd     <= 1'b1;
 		sdram_clkref <= clk;
 	end	
-	else if(ioctl_download && ioctl_wr && ioctl_index==1) begin
-		sdram_din    = ioctl_data;
-		sdram_addr   = ioctl_addr + 'h8995;
-		sdram_wr     = ioctl_wr;
-		sdram_rd     = 1'b1;
-		sdram_clkref = clk;
-	end	
-	else if(eraser_busy) begin	
-		sdram_din    = eraser_data;
-		sdram_addr   = eraser_addr;
-		sdram_wr     = eraser_wr;
-		sdram_rd     = 1'b1;		
-		sdram_clkref = clk;
-	end	
+	//else if(ioctl_download && ioctl_wr && ioctl_index==1) begin
+	//	sdram_din    = ioctl_data;
+	//	sdram_addr   = ioctl_addr + 'h8995;
+	//	sdram_wr     = ioctl_wr;
+	//	sdram_rd     = 1'b1;
+	//	sdram_clkref = clk;
+	//end	
+	//else if(eraser_busy) begin	
+	//	sdram_din    = eraser_data;
+	//	sdram_addr   = eraser_addr;
+	//	sdram_wr     = eraser_wr;
+	//	sdram_rd     = 1'b1;		
+	//	sdram_clkref = clk;
+	//end	
 	else begin
 		sdram_din    = vdc_sdram_din;
 		sdram_addr   = vdc_sdram_addr;
@@ -239,8 +239,8 @@ dpram #(.address_width(18),.data_width(8)) dpram
 	.wren_a(sdram_wr),
 	.enable_a(sdram_rd),
 	
-	.address_b(sdram_addr[17:0]),
-	.clock_b(clk)
+	//.address_b(sdram_addr[17:0]),
+	//.clock_b(clk)
 );
 
 endmodule

@@ -52,6 +52,7 @@ VL_MODULE(Vtop) {
     // Internals; generally not touched by application code
     CData/*0:0*/ top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__clock_b;
     CData/*0:0*/ top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_b;
+    CData/*0:0*/ top__DOT__laser500__DOT__dpram__DOT__clock_b;
     CData/*0:0*/ top__DOT__clk_48;
     CData/*0:0*/ top__DOT__clk_12;
     CData/*0:0*/ top__DOT__reset;
@@ -470,7 +471,6 @@ VL_MODULE(Vtop) {
     CData/*0:0*/ top__DOT__laser500__DOT__dpram__DOT__wren_a;
     CData/*7:0*/ top__DOT__laser500__DOT__dpram__DOT__data_a;
     CData/*7:0*/ top__DOT__laser500__DOT__dpram__DOT__q_a;
-    CData/*0:0*/ top__DOT__laser500__DOT__dpram__DOT__clock_b;
     CData/*0:0*/ top__DOT__laser500__DOT__dpram__DOT__enable_b;
     CData/*0:0*/ top__DOT__laser500__DOT__dpram__DOT__wren_b;
     CData/*7:0*/ top__DOT__laser500__DOT__dpram__DOT__data_b;
@@ -666,8 +666,6 @@ VL_MODULE(Vtop) {
     CData/*7:0*/ __Vdly__top__DOT__laser500__DOT__VTL_chip__DOT__ramDataD;
     CData/*7:0*/ __Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v0;
-    CData/*7:0*/ __Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
-    CData/*0:0*/ __Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     CData/*0:0*/ __Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__BTR_r;
     CData/*1:0*/ __Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__XY_State;
     CData/*7:0*/ __Vdly__top__DOT__laser500__DOT__cpu__DOT__i_tv80_core__DOT__IR;
@@ -684,7 +682,10 @@ VL_MODULE(Vtop) {
     CData/*0:0*/ __Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__mem__v0;
     CData/*7:0*/ __Vdlyvval__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__mem__v0;
+    CData/*7:0*/ __Vdlyvval__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
+    CData/*0:0*/ __Vdlyvset__top__DOT__laser500__DOT__dpram__DOT__mem__v1;
     CData/*0:0*/ __VinpClk__TOP__top__DOT__laser500__DOT____Vcellinp__cpu__reset_n;
+    CData/*0:0*/ __Vclklast__TOP__top__DOT__laser500__DOT__dpram__DOT__clock_b;
     CData/*0:0*/ __Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset__DOT__clock_b;
     CData/*0:0*/ __Vclklast__TOP__top__DOT__laser500__DOT__VTL_chip__DOT__rom_charset_alternate__DOT__clock_b;
     CData/*0:0*/ __Vclklast__TOP__clk_48;
@@ -907,9 +908,8 @@ VL_MODULE(Vtop) {
     static QData _change_request(Vtop__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vtop__Syms* __restrict vlSymsp);
   public:
-    static void _combo__TOP__11(Vtop__Syms* __restrict vlSymsp);
-    static void _combo__TOP__14(Vtop__Syms* __restrict vlSymsp);
-    static void _combo__TOP__18(Vtop__Syms* __restrict vlSymsp);
+    static void _combo__TOP__16(Vtop__Syms* __restrict vlSymsp);
+    static void _combo__TOP__21(Vtop__Syms* __restrict vlSymsp);
     static void _combo__TOP__4(Vtop__Syms* __restrict vlSymsp);
   private:
     static void _ctor_var_reset(Vtop* self) VL_ATTR_COLD;
@@ -924,11 +924,15 @@ VL_MODULE(Vtop) {
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _initial__TOP__1(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _sequent__TOP__10(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__11(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__12(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__13(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__14(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__15(Vtop__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__16(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__17(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__18(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__19(Vtop__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__20(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__5(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__6(Vtop__Syms* __restrict vlSymsp);
     static void _sequent__TOP__7(Vtop__Syms* __restrict vlSymsp);

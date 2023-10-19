@@ -45,7 +45,7 @@ wire [5:0] video_g;
 wire [5:0] video_b;
 wire display_enable;
 
-   assign VGA_DE = display_enable;
+   assign VGA_DE = ~display_enable;
    assign VGA_HS = video_hs;
    assign VGA_VS = video_vs;
    assign VGA_R  = { video_r[5:4] , video_r};

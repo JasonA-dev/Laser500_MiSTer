@@ -338,15 +338,15 @@ int main(int argc, char** argv, char** env) {
 
 		// Debug VTL_chip
 		ImGui::Begin("VTL_chip");
-		ImGui::Text("RESET:  0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__RESET);	
+		ImGui::Text("RESET:        0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__RESET);	
 		ImGui::Spacing();
-		ImGui::Text("A:    0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__A);	
-		ImGui::Text("DI:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DI);	
-		ImGui::Text("DO:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DO);
+		ImGui::Text("A:            0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__A);	
+		ImGui::Text("DI:           0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DI);	
+		ImGui::Text("DO:           0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__DO);
 		ImGui::Spacing();	
 		ImGui::Text("sdram_addr:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_addr);	
-		ImGui::Text("sdram_dout:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_dout);	
-		ImGui::Text("sdram_din:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din);
+		ImGui::Text("sdram_dout:   0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_dout);	
+		ImGui::Text("sdram_din:    0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_din);
 		ImGui::Text("sdram_wr:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_wr);	
 		ImGui::Text("sdram_rd:     0x%04X", top->top__DOT__laser500__DOT__VTL_chip__DOT__sdram_rd);
 		ImGui::Spacing();		
