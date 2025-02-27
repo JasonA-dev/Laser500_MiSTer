@@ -7,7 +7,7 @@ module rom_charset_alternate
 (
 	parameter DW = 8,
 	parameter AW = 13,
-	parameter FN = "../hex/charset64new.hex"
+	parameter FN = "../hex/charset64.hex"
 )
 (
 	input  wire         clock,

@@ -185,8 +185,6 @@ assign VGA_SCALER = 0;
 assign HDMI_FREEZE = 0;
 
 assign AUDIO_S = 0;
-assign AUDIO_L = 0;
-assign AUDIO_R = 0;
 assign AUDIO_MIX = 0;
 
 assign LED_DISK = 0;
@@ -251,7 +249,6 @@ hps_io #(.CONF_STR(CONF_STR),.PS2DIV(1000)) hps_io
 	
 	.ps2_key(ps2_key),
 	
-	
 	.ps2_kbd_clk_out    ( ps2_kbd_clk    ),
 	.ps2_kbd_data_out   ( ps2_kbd_data   )
 	
@@ -265,7 +262,8 @@ assign SDRAM_CKE = pll_locked; // was: 1'b1;
 //assign SDRAM_CLK = ram_clock;
 
 wire clk_sys = F14M;
-wire F14Mx2, F14M,F3M;
+wire F14Mx2, F14M, F3M;
+
 pll pll
 (
 	.refclk(CLK_50M),
@@ -282,9 +280,7 @@ wire reset = RESET | status[0] | buttons[1];
 
 wire [1:0] col = status[4:3];
 
-wire HBlank;
 wire video_hs;
-wire VBlank;
 wire video_vs;
 wire ce_pix;
 wire [7:0] video;
@@ -292,17 +288,17 @@ wire [7:0] video;
 wire [5:0] video_r;
 wire [5:0] video_g; 
 wire [5:0] video_b;
-wire display_enable;
+wire non_visible_area;
 
 assign CLK_VIDEO = clk_sys;
 assign CE_PIXEL = 1'b1;
 
-assign VGA_DE = display_enable;
+assign VGA_DE = ~non_visible_area;
 assign VGA_HS = video_hs;
 assign VGA_VS = video_vs;
-assign VGA_R  = { video_r[5:4] , video_r};
-assign VGA_G  = { video_g[5:4] , video_g};
-assign VGA_B  = { video_b[5:4] , video_b};
+assign VGA_R  = { video_r[5:4] , video_r };
+assign VGA_G  = { video_g[5:4] , video_g };
+assign VGA_B  = { video_b[5:4] , video_b };
 
 reg  [26:0] act_cnt;
 always @(posedge clk_sys) act_cnt <= act_cnt + 1'd1; 
@@ -319,11 +315,12 @@ wire ps2_kbd_data;
 
 wire [ 6:0] KD;
 wire        reset_key;
+wire cpu_addr;
 
 keyboard keyboard 
 (
 	.reset    ( !pll_locked ),
-	.clk      ( F14M  ),
+	.clk      ( clk_sys  ),
 
 	.ps2_clk  ( ps2_kbd_clk  ),
 	.ps2_data ( ps2_kbd_data ),
@@ -380,17 +377,28 @@ wire [7:0]  sdram_dout   ;
 wire [7:0]  sdram_din    ; 
 
 laser500 laser500 (
-    .clk(F14M),
+    .F14M(clk_sys),
+	.F14Mx2(F14Mx2),
+	.F3M(F3M),
     .reset(reset),
 	.pll_locked(pll_locked),
 
 	// video
-	.hsync  ( video_hs ),
-	.vsync  ( video_vs ),
-	.r      ( video_r  ),
-	.g      ( video_g  ),
-	.b      ( video_b  ),
-	.display_enable(display_enable),
+	.video_hs  ( video_hs ),
+	.video_vs  ( video_vs ),
+	.video_r( video_r  ),
+	.video_g( video_g  ),
+	.video_b( video_b  ),
+	.non_visible_area(non_visible_area),
+
+	.alt_font(st_alt_font),
+
+	.CPU_ADDR(cpu_addr),
+
+	.AUDIO_L(AUDIO_L),
+	.AUDIO_R(AUDIO_R),
+
+	.UART_RX(UART_RXD),
 	
 	.joystick_0   ( joystick_0 ),
 	.joystick_1   ( joystick_1 ),
@@ -410,41 +418,5 @@ laser500 laser500 (
 
 reg LED_ON = 0;
 assign LED = ~LED_ON;
-
-/******************************************************************************************/
-/******************************************************************************************/
-/***************************************** @audio *****************************************/
-/******************************************************************************************/
-/******************************************************************************************/
-// latches cassette input
-/*
-reg CASIN;
-always @(posedge F14M) begin
-	CASIN <= ~UART_RX;
-end
-
-wire BUZZER;
-wire CASOUT;
-wire audio;
-
-//
-// BUZZER for emulating the keyboard builtin speaker
-// CASIN for tape monitor
-// CASOUT for save to tape wire
-//
-dac #(.C_bits(16)) dac_AUDIO_L
-(
-	.clk_i(F14M),
-   .res_n_i(pll_locked),	
-	.dac_i({ BUZZER ^ CASIN ^ (~CASOUT), 15'b0000000 }),
-	.dac_o(audio)
-);
-
-always @(posedge F14M) begin
-	AUDIO_L <= audio;
-	AUDIO_R <= audio;
-end
-
-*/
 
 endmodule

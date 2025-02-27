@@ -3,12 +3,13 @@
 
 module VTL_chip 
 (	
-	input    F14M,	              // pixel clock 14.77873   (14688000 in laser500emu)
-	input    RESET,               // initialize at power up
-	input    BLANK,               // blank signal - nothing is done	
+	input    F14M,	           // pixel clock 14.77873   (14688000 in laser500emu)
+	input	 F14Mx2,
+	input    RESET,           // initialize at power up
+	input    BLANK,           // blank signal - nothing is done	
 		
 	// cpu interface
-    output           CPUCK,       // CPU clock to CPU (F14M / 4) - (not used on the MiST, we use F14M & CPUENA)
+   output           CPUCK,       // CPU clock to CPU (F14M / 4) - (not used on the MiST, we use F14M & CPUENA)
 	output reg       CPUENA,      // CPU enabled signal
 	output           WAIT_n,      // WAIT (TODO handle wait states)
 	input            MREQ_n,      // MEMORY REQUEST (not used--yet) indicates the bus holds a valid memory address
@@ -21,15 +22,15 @@ module VTL_chip
 	
 	// keyboard 	
 	input [ 6:0] KD,  
-    input        CASIN,
+   input        CASIN,
 
-    input [31:0] joystick_0,
+   input [31:0] joystick_0,
 	input [31:0] joystick_1,
 	
 	// sdram interface
 	output reg [24:0] sdram_addr, // sdram address  
 	input       [7:0] sdram_dout, // sdram data ouput
-    output reg  [7:0] sdram_din,  // sdram data input
+   output reg  [7:0] sdram_din,  // sdram data input
 	output reg        sdram_wr,   // sdram write
 	output reg        sdram_rd,   // sdram read	
 	
@@ -39,9 +40,9 @@ module VTL_chip
 	output [5:0] r,
 	output [5:0] g,
 	output [5:0] b,
-	
-	output wire non_visible_area,
 
+	output non_visible_area,
+	
 	output reg BUZZER,
 	output reg CASOUT,   // mapped I/O bit 2  		
 	
@@ -49,7 +50,7 @@ module VTL_chip
 	output [2:0] cnt,
 	
 	input          img_mounted, 
-    input   [31:0] img_size    
+   input   [31:0] img_size    
 );
 
 reg [7:0] hfp = 10;         // horizontal front porch, unused time before hsync
@@ -132,11 +133,11 @@ assign charsetQ = (!alt_font) ? charsetQ_std : charsetQ_alt;
 // CHARSET ROM
 //******************************************************************************************************************************
 
-dpram #(14, 8,"../hex/charset8knew.hex") rom_charset
+dpram #(8, 14,"../hex/charset8knew.hex") rom_charset
 (
 	.clock_a(F14M),
 	.address_a(charsetAddress),
-	.enable_a(1'b1),
+	//.enable_a(1'b1),
 	.wren_a(1'b0),
 	.data_a(),
 	.q_a(charsetQ_std)
@@ -146,17 +147,31 @@ dpram #(14, 8,"../hex/charset8knew.hex") rom_charset
 // CHARSET 64 ROM
 //******************************************************************************************************************************
 
-dpram #(13, 8,"../hex/charset64.hex") rom_charset_alternate
+dpram #(8, 13,"../hex/charset64.hex") rom_charset_alternate
 (
 	.clock_a(F14M),
 	.address_a(charsetAddress),
-	.enable_a(1'b1),
+	//.enable_a(1'b1),
 	.wren_a(1'b0),
 	.data_a(),
 	.q_a(charsetQ_alt)
 );
 
 //******************************************************************************************************************************
+
+/*
+rom_charset rom_charset (
+	.address(charsetAddress),
+	.clock(F14M),
+	.q(charsetQ_std)
+);							  						
+
+rom_charset_alternate rom_charset_alternate (
+	.address(charsetAddress),
+	.clock(F14M),
+	.q(charsetQ_alt)
+);							  						
+*/
 
 wire [3:0] fg;
 wire [3:0] bg;
@@ -165,7 +180,7 @@ wire [3:0] bg;
 assign hsync = (hcnt < hsw) ? 0 : 1;
 assign vsync = (vcnt <   2) ? 0 : 1;
 
-//assign non_visible_area = hcnt < hsw+hbp || vcnt < 64 || vcnt > 250 || hcnt >= hsw+hbp+H;                        
+//wire non_visible_area = hcnt < hsw+hbp || vcnt < 64 || vcnt > 250 || hcnt >= hsw+hbp+H;                        
 assign non_visible_area = hcnt < hsw+hbp || vcnt < 4 || vcnt > (312-2) || hcnt >= hsw+hbp+H;
 						  
 // calculate foreground and background colors						  
@@ -230,7 +245,7 @@ always@(posedge F14M) begin
 			// normal VDC operation
 				
 			// works with 118 MHz sdram clock
-				 if(VDC_cnt == 7) begin sdram_rd <= 1; sdram_addr <= videoAddress;       end 	// VDC ram reading starts; ROM reading ended, data is stored in "char" or "ramDataD"
+				  if(VDC_cnt == 7) begin sdram_rd <= 1; sdram_addr <= videoAddress;       end 	// VDC ram reading starts; ROM reading ended, data is stored in "char" or "ramDataD"
 			else if(VDC_cnt == 0) begin                                                  end 	// VDC ram reading ended; VDC saves data into "ramData"; ROM reading starts
 			else if(VDC_cnt == 1) begin                                                  end 	// 
 			else if(VDC_cnt == 2) begin                                                  end 	// 
@@ -433,8 +448,8 @@ always@(posedge F14M) begin
 					else if(vdc_graphic_mode_number == 3 || vdc_graphic_mode_number == 0) begin
 						// GR 3 160x192x16, GR 0 160x96
 						if(xcnt[1:0] == 0) begin
-							pixel <= char[3:0];
-							char <= char >> 4;
+							pixel = char[3:0];
+							char = char >> 4;
 						end               
 					end 
 					else if(vdc_graphic_mode_number == 2) begin
@@ -488,7 +503,7 @@ always@(posedge F14M) begin
 					ramAddress[ 4]  = ycnt[6];
 					ramAddress[3:0] = 0;
 					
-						 if(vdc_graphic_mode_number == 5) ramAddress = ramAddress + (xcnt1 >> 3);   
+						  if(vdc_graphic_mode_number == 5) ramAddress = ramAddress + (xcnt1 >> 3);   
 					else if(vdc_graphic_mode_number == 4) ramAddress = ramAddress + (xcnt2 >> 3);   
 					else if(vdc_graphic_mode_number == 3) ramAddress = ramAddress + (xcnt1 >> 3);   
 
@@ -507,7 +522,7 @@ always@(posedge F14M) begin
 					ramAddress[ 3]  = ycnt[6];
 					ramAddress[2:0] = 0;
 					
-						 if(vdc_graphic_mode_number == 2) ramAddress = ramAddress + (xcnt1 >> 4);   
+						  if(vdc_graphic_mode_number == 2) ramAddress = ramAddress + (xcnt1 >> 4);   
 					else if(vdc_graphic_mode_number == 1) ramAddress = ramAddress + (xcnt3 >> 4);   
 
 				end else if(vdc_graphic_mode_number == 0) begin
@@ -541,7 +556,7 @@ always@(posedge F14M) begin
 				ramAddress[ 4]  = ycnt[6];
 				ramAddress[3:0] = 0;
 				
-					 if(vdc_text80_enabled) ramAddress = ramAddress + (xcnt1 >> 3);   
+					  if(vdc_text80_enabled) ramAddress = ramAddress + (xcnt1 >> 3);   
 				else                        ramAddress = ramAddress + (xcnt2 >> 3);
 			end			
 				
@@ -669,4 +684,3 @@ assign b =
 	wire [24:0] cpuReadAddress = { 7'd0, bank, base_addr };		
 		
 endmodule
-

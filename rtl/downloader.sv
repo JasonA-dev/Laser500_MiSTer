@@ -8,6 +8,12 @@ module downloader (
    input SPI_SS3,
    input SPI_SS4,
 	
+	input ioctl_download,  // signal indicating an active rom download
+	input wire [7:0]  ioctl_index,     // 0=rom download, 1=prg dowload
+    input wire [24:0] ioctl_addr,
+    input wire [7:0]  ioctl_dout,
+	input ioctl_wr,
+
 	input 			   clk,
 	input             clk_ena,
 	output reg        wr,
@@ -24,6 +30,13 @@ wire        dio_wr;
 wire [24:0] dio_addr;
 wire [7:0]  dio_data;
 
+assign dio_dowloading = ioctl_download;
+assign dio_index = ioctl_index;      
+assign dio_wr = ioctl_wr;
+assign dio_addr = ioctl_addr;
+assign dio_data = ioctl_dout;
+
+/*
 data_io data_io (
 	.clk_sys ( clk      ),
 	.clkref_n( ~clk_ena ),  // keep this to zero
@@ -41,6 +54,7 @@ data_io data_io (
    .ioctl_dout     ( dio_data       ),
 	.ioctl_wr       ( dio_wr         )
 );
+*/
 
 assign ROM_done = ROM_loaded;
 
