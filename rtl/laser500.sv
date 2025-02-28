@@ -143,7 +143,7 @@ assign adapter_key        = ps2_key[8]
                             : {8'h00, ps2_key[7:0]};
 
 // key_status is simply the pressed bit [9].
-assign adapter_key_status = ps2_key[9];
+assign adapter_key_status = ~ps2_key[9];
 
 keyboard keyboard 
 (
