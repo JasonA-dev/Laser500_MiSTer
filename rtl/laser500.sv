@@ -19,11 +19,7 @@ module laser500 (
 	input wire [31:0] joystick_0,
 	input wire [31:0] joystick_1,
 
-	//input wire [ 6:0] KD, 
-
 	input wire [10:0] ps2_key,
-
-	//output wire [15:0] CPU_ADDR,
 
 	output wire AUDIO_L,
 	output wire AUDIO_R,
@@ -37,8 +33,6 @@ module laser500 (
 	input wire [7:0]  ioctl_index
 
 );
-
-//assign CPU_ADDR = cpu_addr;
 
 /******************************************************************************************/
 /******************************************************************************************/
@@ -90,7 +84,6 @@ T80pa cpu
 	
 );
 
-
 /*
 tv80s cpu 
 (
@@ -113,13 +106,18 @@ tv80s cpu
 );
 */
 
+/******************************************************************************************/
+/******************************************************************************************/
+/***************************************** @keyboard **************************************/
+/******************************************************************************************/
+/******************************************************************************************/
+
 ///////////////////////////////////////////////////////////////////////////////
 // 1. Generate a valid strobe whenever ps2_key[10] toggles
 ///////////////////////////////////////////////////////////////////////////////
+wire [ 6:0] KD;
 reg old_state;
 reg key_strobe;
-
-wire [ 6:0] KD;
 
 always @(posedge F14M or posedge CPU_RESET) begin
     if (CPU_RESET) begin
@@ -135,13 +133,26 @@ always @(posedge F14M or posedge CPU_RESET) begin
     end
 end
 
+wire [15:0] adapter_key;
+wire        adapter_key_status;
+
+// If extended bit [8] = 1, put 0xE0 in the top byte, else 0x00.
+// Lower byte is the scancode [7:0].
+assign adapter_key        = ps2_key[8] 
+                            ? {8'hE0, ps2_key[7:0]} 
+                            : {8'h00, ps2_key[7:0]};
+
+// key_status is simply the pressed bit [9].
+assign adapter_key_status = ps2_key[9];
+
 keyboard keyboard 
 (
 	.reset    ( CPU_RESET ),
 	.clk      ( F14M  ),
 
-	.ps2_key  ( ps2_key ),
+	.key  ( adapter_key ),
 	.valid	  ( key_strobe  ),
+	.key_status( adapter_key_status ),
 
 	.address  ( cpu_addr  ),
 	.KD       ( KD        ),
@@ -158,14 +169,6 @@ keyboard keyboard
 // VTL CHIP GA1
 //
 					
-//wire       F3M;					
-//wire       F14M;
-//wire [5:0] video_r;
-//wire [5:0] video_g; 
-//wire [5:0] video_b;
-//wire       video_hs;
-//wire       video_vs;
-
 wire [24:0] vdc_sdram_addr; 
 wire        vdc_sdram_wr;
 wire        vdc_sdram_rd;
@@ -243,14 +246,6 @@ downloader
 	.PTR_PROGND(25'h10000 + 25'h3E9)      // SDRAM address of END pointer (0x83e9)
 )
 downloader (
-	
-	// new SPI interface
-    //.SPI_DO ( SPI_DO  ),
-	//.SPI_DI ( SPI_DI  ),
-    //.SPI_SCK( SPI_SCK ),
-    //.SPI_SS2( SPI_SS2 ),
-    //.SPI_SS3( SPI_SS3 ),
-    //.SPI_SS4( SPI_SS4 ),
 	
 	.ioctl_download(ioctl_download),
     .ioctl_index   (ioctl_index),
@@ -353,34 +348,6 @@ end
 wire CPU_RESET = ~boot_completed | is_downloading | eraser_busy | reset;
 wire BLANK     = ~boot_completed | is_downloading | eraser_busy;
 
-/*
-// sdram from zx spectrum core	
-sdram sdram (
-	// interface to the MT48LC16M16 chip
-   .sd_data        ( SDRAM_DQ                  ),
-   .sd_addr        ( SDRAM_A                   ),
-   .sd_dqm         ( {SDRAM_DQMH, SDRAM_DQML}  ),
-   .sd_cs          ( SDRAM_nCS                 ),
-   .sd_ba          ( SDRAM_BA                  ),
-   .sd_we          ( SDRAM_nWE                 ),
-   .sd_ras         ( SDRAM_nRAS                ),
-   .sd_cas         ( SDRAM_nCAS                ),
-
-   // system interface
-   .clk            ( ram_clock                 ),
-   .clkref         ( sdram_clkref              ),
-   .init           ( !pll_locked               ),
-
-   // cpu interface	
-   .din            ( sdram_din                 ),
-   .addr           ( sdram_addr                ),
-   .we             ( sdram_wr                  ),
-   .oe         	 ( sdram_rd                  ),	
-   .dout           ( sdram_dout                )	
-);
-*/
-
-
 /******************************************************************************************/
 /******************************************************************************************/
 /***************************************** @audio *****************************************/
@@ -424,7 +391,6 @@ dpram #(8, 18) dpram
 	.data_a(sdram_din),
 	.q_a(sdram_dout),
 	.wren_a(sdram_wr)
-	//.enable_a(sdram_rd)
 );
 
 endmodule

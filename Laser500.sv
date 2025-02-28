@@ -304,51 +304,6 @@ reg  [26:0] act_cnt;
 always @(posedge clk_sys) act_cnt <= act_cnt + 1'd1; 
 assign LED_USER    = act_cnt[26]  ? act_cnt[25:18]  > act_cnt[7:0]  : act_cnt[25:18]  <= act_cnt[7:0];
 
-/******************************************************************************************/
-/******************************************************************************************/
-/***************************************** @keyboard **************************************/
-/******************************************************************************************/
-/******************************************************************************************/
-
-/*	 
-wire [ 6:0] KD;
-wire        reset_key;
-wire [15:0] cpu_addr;
-
-///////////////////////////////////////////////////////////////////////////////
-// 1. Generate a valid strobe whenever ps2_key[10] toggles
-///////////////////////////////////////////////////////////////////////////////
-reg old_state;
-reg key_strobe;
-
-always @(posedge clk_sys or posedge reset) begin
-    if (reset) begin
-        old_state   <= 1'b0;
-        key_strobe  <= 1'b0;
-    end else begin
-        // Watch bit [10] for toggles
-        old_state <= ps2_key[10];
-        if (old_state != ps2_key[10]) begin
-            // Toggle key_strobe every time ps2_key[10] changes
-            key_strobe <= ~key_strobe;
-        end
-    end
-end
-
-keyboard keyboard 
-(
-	.reset    ( reset ),
-	.clk      ( clk_sys  ),
-
-	.ps2_key  ( ps2_key ),
-	.valid	  ( key_strobe  ),
-
-	.address  ( cpu_addr  ),
-	.KD       ( KD        ),
-	.reset_key( reset_key )	
-);
-*/
-
 wire [2:0] hcnt;
 
 /******************************************************************************************/
@@ -412,8 +367,6 @@ laser500 laser500 (
 
 	.alt_font(st_alt_font),
 
-	//.CPU_ADDR(cpu_addr),
-
 	.AUDIO_L(AUDIO_L),
 	.AUDIO_R(AUDIO_R),
 
@@ -423,8 +376,6 @@ laser500 laser500 (
 	.joystick_1   ( joystick_1 ),
 
 	.ps2_key  ( ps2_key ),
-
-	//.KD(KD),
 
 	.ioctl_download(ioctl_download),
 	.ioctl_wr(ioctl_wr),

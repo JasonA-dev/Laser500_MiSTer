@@ -3,9 +3,10 @@ module keyboard (
 	input clk,
 	input reset,
 
-	input wire [10:0] ps2_key,
-	
+	input wire [15:0] key,
 	input wire valid,
+	input wire key_status,
+
 
 	// VTL chip interface
     input      [10:0] address,   
@@ -140,21 +141,20 @@ parameter [15:0] KEY_MULT_NUMPAD   = 'h7c;
 parameter [15:0] KEY_SLASH_NUMPAD  = 'he04a;
 parameter [15:0] KEY_DOT_NUMPAD    = 'h71;
 
-wire [7:0] kdata;  // keyboard data byte, 0xE0 = extended key, 0xF0 release key
-assign kdata = ps2_key[7:0];
+//wire [7:0] kdata;  // keyboard data byte, 0xE0 = extended key, 0xF0 release key
+//assign kdata = ps2_key[7:0];
 
-//wire valid;        // 1 = data byte contains valid keyboard data 
-wire error;        // not used here
+//wire error;        // not used here
+//wire key_status;
+//wire key_extended;
 
-reg key_status;
-reg key_extended;
+//assign key_status = ps2_key[9];
+//assign key_extended = ps2_key[8];
 
-wire [15:0] key = { (key_extended ? 8'he0 : 8'h00) , kdata };
+//wire [15:0] key = { (key_extended ? 8'he0 : 8'h00) , kdata };
 
 always @(posedge clk) begin
 	if(reset) begin		
-      key_status <= 1'b1;
-      key_extended <= 1'b0;
 		KM[ 0] <= 7'b1111111;
 		KM[ 1] <= 7'b1111111;
 		KM[ 2] <= 7'b1111111;
@@ -171,19 +171,8 @@ always @(posedge clk) begin
 	else begin
 		// ps2 decoder has received a valid byte
 		if(valid) begin
-			if(kdata == 8'he0) 
-				// extended key code
-            key_extended <= 1'b1;
-         else if(kdata == 8'hf0)
-				// release code
-            key_status <= 1'b1;
-         else begin
-			   // key press
-				key_extended <= 1'b0;
-				key_status   <= 1'b0;
-				
 				case(key)	
-               KEY_RESET        : begin reset_key <= ~key_status; end													
+               		KEY_RESET        : begin reset_key <= ~key_status; end													
 					KEY_ALT_LEFT     : begin reset_key <= ~key_status; end													
 					KEY_SHIFT        : begin KM['h0][6] <= key_status; end
 					KEY_SHIFT_RIGHT  : begin KM['h0][6] <= key_status; end
@@ -281,22 +270,8 @@ always @(posedge clk) begin
 					KEY_SLASH_NUMPAD : begin KM['h7][3] <= key_status; end 
 					KEY_DOT_NUMPAD   : begin KM['h7][2] <= key_status; end 	
 				endcase
-			end
 		end		
 	end
 end
-
-/*
-ps2_intf ps2_keyboard (
-	
-	.clk      (clk),
-    .reset    (reset),
-    .ps2_key  (ps2_key),  
-
-	.DATA	  ( kdata  ),
-	.VALID	  ( valid  ),
-	.ERROR	  ( error  )
-);
-*/
 
 endmodule
