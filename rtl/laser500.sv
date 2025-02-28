@@ -19,9 +19,11 @@ module laser500 (
 	input wire [31:0] joystick_0,
 	input wire [31:0] joystick_1,
 
-	input wire [ 6:0] KD, 
+	//input wire [ 6:0] KD, 
 
-	output wire [15:0] CPU_ADDR,
+	input wire [10:0] ps2_key,
+
+	//output wire [15:0] CPU_ADDR,
 
 	output wire AUDIO_L,
 	output wire AUDIO_R,
@@ -36,7 +38,7 @@ module laser500 (
 
 );
 
-assign CPU_ADDR = cpu_addr;
+//assign CPU_ADDR = cpu_addr;
 
 /******************************************************************************************/
 /******************************************************************************************/
@@ -110,6 +112,41 @@ tv80s cpu
 	.dout(cpu_dout)
 );
 */
+
+///////////////////////////////////////////////////////////////////////////////
+// 1. Generate a valid strobe whenever ps2_key[10] toggles
+///////////////////////////////////////////////////////////////////////////////
+reg old_state;
+reg key_strobe;
+
+wire [ 6:0] KD;
+
+always @(posedge F14M or posedge CPU_RESET) begin
+    if (CPU_RESET) begin
+        old_state   <= 1'b0;
+        key_strobe  <= 1'b0;
+    end else begin
+        // Watch bit [10] for toggles
+        old_state <= ps2_key[10];
+        if (old_state != ps2_key[10]) begin
+            // Toggle key_strobe every time ps2_key[10] changes
+            key_strobe <= ~key_strobe;
+        end
+    end
+end
+
+keyboard keyboard 
+(
+	.reset    ( CPU_RESET ),
+	.clk      ( F14M  ),
+
+	.ps2_key  ( ps2_key ),
+	.valid	  ( key_strobe  ),
+
+	.address  ( cpu_addr  ),
+	.KD       ( KD        ),
+	.reset_key( reset_key )	
+);
 
 /******************************************************************************************/
 /******************************************************************************************/

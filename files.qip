@@ -9,7 +9,7 @@ set_global_assignment -name QIP_FILE rtl/rom_charset.qip
 set_global_assignment -name QIP_FILE rtl/rom_charset_alternate.qip
 set_global_assignment -name VERILOG_FILE rtl/keyboard.v
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/dpram.sv
-set_global_assignment -name VHDL_FILE rtl/ps2_intf.vhd
+#set_global_assignment -name SYSTEMVERILOG_FILE rtl/ps2_intf.sv
 set_global_assignment -name VHDL_FILE rtl/rc_filter_1o.vhd
 set_global_assignment -name VHDL_FILE rtl/T80/T80pa.vhd
 set_global_assignment -name VHDL_FILE rtl/T80/T80_Reg.vhd

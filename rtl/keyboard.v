@@ -3,12 +3,12 @@ module keyboard (
 	input clk,
 	input reset,
 
-	// ps2 interface	
-	input ps2_clk,
-	input ps2_data,
+	input wire [10:0] ps2_key,
 	
+	input wire valid,
+
 	// VTL chip interface
-   input      [10:0] address,   
+    input      [10:0] address,   
 	output     [ 6:0] KD,   
 	output reg reset_key,
 	
@@ -141,7 +141,9 @@ parameter [15:0] KEY_SLASH_NUMPAD  = 'he04a;
 parameter [15:0] KEY_DOT_NUMPAD    = 'h71;
 
 wire [7:0] kdata;  // keyboard data byte, 0xE0 = extended key, 0xF0 release key
-wire valid;        // 1 = data byte contains valid keyboard data 
+assign kdata = ps2_key[7:0];
+
+//wire valid;        // 1 = data byte contains valid keyboard data 
 wire error;        // not used here
 
 reg key_status;
@@ -284,20 +286,17 @@ always @(posedge clk) begin
 	end
 end
 
-// the ps2 decoder has been taken from the zx spectrum core
+/*
 ps2_intf ps2_keyboard (
-	.CLK		 ( clk       ),
-	.nRESET	 ( !reset    ),
 	
-	// PS/2 interface
-	.PS2_CLK  ( ps2_clk   ),
-	.PS2_DATA ( ps2_data  ),
-	
-	// Byte-wide data interface - only valid for one clock
-	// so must be latched externally if required
-	.DATA		  ( kdata  ),
+	.clk      (clk),
+    .reset    (reset),
+    .ps2_key  (ps2_key),  
+
+	.DATA	  ( kdata  ),
 	.VALID	  ( valid  ),
 	.ERROR	  ( error  )
 );
+*/
 
 endmodule
